@@ -10,7 +10,7 @@ def encode(func):
 
     return wrapper
 
-
+#123456
 class MyClass:
     __instance = None
 
