@@ -2,7 +2,7 @@ class Config:
     name = '测试'
     age = '18'
 
-
+# test
 def encode(func):
     def wrapper(*args, **kwargs):
         print('encode')
