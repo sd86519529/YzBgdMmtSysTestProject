@@ -1,0 +1,27 @@
+# 服务配置文件
+# 接口对应用例名称
+EXCLE:
+  MCHACCNT_PAY_DISPATCH: machaccnt_pay_dispatch,支付记账接口测试用例.xlsx
+  MCHACCNT_REFUND_DISPATCH: machaccnt_pay_dispatch,退款记账接口测试用例.xlsx
+
+# 接口请求时商户号对应的MD5TOKEN加密
+MD5TOKEN:
+  JI0: 9b389216c3c55a7c535510b33b9e6ec6
+  BUu: 9b389216c3c55a7c535510b33b9e6eb7
+
+# 接口环境地址
+# todo 若需要区分不同ip 不同端口对应其不同服务 或 其他环境请求方式有变化需改动。暂时这么写
+HOST:
+  TEST: http://172.16.202.163:3054/api/deposit.htm
+
+MERCHANT:
+  MCHNO: MH20181229115220NBUu
+
+SUBMERCHANTS:
+  MUCSUB_1: T0020200303191941000000  # 子商户
+  MUCSUB_2: T0020181229184441000000  # 子商户
+  MUCSUB_3: T0020200303191947000001  # 子商户
+  PROFIT_1: T0020181229115338000002  # 分润商户
+  PROFIT_2: T0020200312145520000024  # 分润商户
+
+
