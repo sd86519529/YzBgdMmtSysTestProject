@@ -16,6 +16,7 @@ class MachPayDispatchDown(SqlSave):
         settled_ant: 可结算金额{'mch_ant_no[mc_number]':'settled_ant'}
         mch_ant: 账面金额{'mch_ant_no[mc_number]':'mch_ant'}
         """
+        # 准备各表的明细金额和条目
         if isinstance(table_name, list):
             self.amt_info = dict()
             for tb_number in range(len(table_name)):
@@ -23,7 +24,7 @@ class MachPayDispatchDown(SqlSave):
                 self.amt_info[table_name[tb_number]] = info
         else:
             self.amt_info = self.select_amt_info(table_name, trans_no, event)
-
+        # 准备账户余额和可结算金额
         if isinstance(mch_ant_no, list):
             self.mch_ant = dict()
             self.settled_ant = dict()
@@ -35,6 +36,7 @@ class MachPayDispatchDown(SqlSave):
         else:
             self.mch_ant = self.select_remain_amt(mch_ant_no)
             self.settled_ant = self.select_settled_amt(mch_ant_no)
+
         # 以上是构造所需要比对的金额
 
     def __str__(self) -> str:
@@ -62,6 +64,10 @@ class MachPayDispatchUp(object):
             self.amt_list.append(i.get('amount'))
             self.oder_no_list.append(i.get('order_no'))
         self.trans_amt_dict = Base.add_amt(self.mch_act_no_list, self.amt_list)
+        # 通过trans_amt_dict 中加入准备金的金额 将准备金账户增加到返回账户列表中 该句代码针对的是活动金额记账
+        self.trans_amt_dict, self.mch_act_no_list = Base.promotion_count(self.amt_list, self.trans_amt_dict,
+                                                                         self.mch_act_no_list)
+
         self.amt_dict = Base.merchant_type(self.mch_act_no_list, self.amt_list)
 
     def __str__(self) -> str:
