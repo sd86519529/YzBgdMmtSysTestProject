@@ -14,7 +14,6 @@ log = Logger('MachPayDispatch').get_log()
 
 exa_and_approve_list = ReadExl(Constants.EXL.PAY, sheet=0).obtain_data()
 flow_not_change_pay = ReadExl.screen_case('支付分账正常调用测试用例', exa_and_approve_list)  # 不含手续费流程测试
-unusual_parameter = ReadExl.screen_case('支付分账异常调用测试用例', exa_and_approve_list)  # 异常参数校验数据
 
 
 @ddt.ddt
@@ -22,7 +21,6 @@ class MachPayDispatch(unittest.TestCase):
     """
     支付记账测试用例: <br>
     1>>子商户不承担手续费的流程组合 test_flow_not_change_pay<br>
-    2>>接口所有异常字段的验证 test_unusual_parameter
     """
 
     @classmethod
@@ -54,20 +52,10 @@ class MachPayDispatch(unittest.TestCase):
         Handle.machaccnt_pay_dispatch_assert(self, html, excepted, self.mach_pay_up_obj, mch_ant_bef,
                                              mch_ant_after,
                                              self.amt_info_after)
-        Clearing.machaccnt_pay_dispatch_clear(self.amt_info_after, self.mach_pay_up_obj)
         log.info('********************************测试结束 -- 数据清理完成 --********************************************')
 
-    @ddt.data(*unusual_parameter)
-    def test_unusual_parameter(self, unusual_parameter):
-        log.info('准备开始执行：^^^^^ %s ^^^^^ 编号的测试用例' % unusual_parameter['编号'])
-        after_treatment_data = Handle.machaccnt_pay_dispatch_handle(unusual_parameter)
-        log.info('参数化处理后的测试数据为:--%s' % after_treatment_data)
-        res, html = RequestBase.send_request(**after_treatment_data)  # 发送请求
-        log.info('本次请求结果为%s' % html)
-        excepted = json.loads(after_treatment_data['excepted_code'])
-        Handle.machaccnt_pay_dispatch_assert(self, html, excepted, part=True)
-
     def tearDown(self):
+        Clearing.machaccnt_pay_dispatch_clear(self.amt_info_after, self.mach_pay_up_obj)
         log.info('******************************** -- 测试结束 -- ********************************************')
         log.info('\r\n\r\n\r\n\r\n')
 

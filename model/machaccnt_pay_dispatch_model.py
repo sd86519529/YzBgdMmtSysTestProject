@@ -51,7 +51,7 @@ class MachPayDispatchUp(object):
     return self.trans_amt_dict 和 self.amt_dict 是数据库数据验证所需要的数据
     """
 
-    def __init__(self, exc_data):
+    def __init__(self, exc_data, is_promotion=False):
         self.mch_act_no_list = []
         self.amt_list = []
         self.oder_no_list = []
@@ -65,9 +65,9 @@ class MachPayDispatchUp(object):
             self.oder_no_list.append(i.get('order_no'))
         self.trans_amt_dict = Base.add_amt(self.mch_act_no_list, self.amt_list)
         # 通过trans_amt_dict 中加入准备金的金额 将准备金账户增加到返回账户列表中 该句代码针对的是活动金额记账
-        self.trans_amt_dict, self.mch_act_no_list = Base.promotion_count(self.amt_list, self.trans_amt_dict,
-                                                                         self.mch_act_no_list)
-
+        if is_promotion:
+            self.trans_amt_dict, self.mch_act_no_list = Base.promotion_count(self.amt_list, self.trans_amt_dict,
+                                                                             self.mch_act_no_list)
         self.amt_dict = Base.merchant_type(self.mch_act_no_list, self.amt_list)
 
     def __str__(self) -> str:

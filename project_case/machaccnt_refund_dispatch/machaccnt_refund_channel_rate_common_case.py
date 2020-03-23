@@ -19,7 +19,8 @@ flow_have_change_refund = ReadExl.screen_case('退款记账正常校验测试用
 @ddt.ddt
 class MachRefundChannel(unittest.TestCase):
     """
-    退款记账接口测试用例
+    退款记账接口测试用例:<br>
+    1>>子商户承担手续费的流程组合 test_flow_not_change_refund
     """
 
     @classmethod

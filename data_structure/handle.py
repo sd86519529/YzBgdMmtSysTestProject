@@ -59,13 +59,21 @@ class Handle(object):
                              msg='接口请求message: %s != %s' % (html.get('message'), excepted['message']))
 
     @staticmethod
-    def mch_amt_assert(self, mch_ant_after, mch_ant_bef, mach_pay_up_obj):
+    def mch_amt_assert(self, mch_ant_after, mch_ant_bef, mach_pay_up_obj, button='pay'):
         """不同子商户在请求前和请求后的金额变化"""
         # 校验各个子商户金额变化正确
-        for key, value in mch_ant_after.items():
-            self.assertEqual(int(value[0][0]) - int(mch_ant_bef[key][0][0]), int(mach_pay_up_obj.trans_amt_dict[key]),
-                             msg='子商户号为:%s的商户，对比子商户金额时 请求后的金额：%s -  请求前的金额 %s 不等于 预期金额：%s' % (
-                                 key, value[0][0], mch_ant_bef[key][0][0], mach_pay_up_obj.trans_amt_dict[key]))
+        if button.__eq__('pay'):
+            for key, value in mch_ant_after.items():
+                self.assertEqual(int(value[0][0]) - int(mch_ant_bef[key][0][0]),
+                                 int(mach_pay_up_obj.trans_amt_dict[key]),
+                                 msg='子商户号为:%s的商户，对比子商户金额时 请求后的金额：%s -  请求前的金额 %s 不等于 预期金额：%s' % (
+                                     key, value[0][0], mch_ant_bef[key][0][0], mach_pay_up_obj.trans_amt_dict[key]))
+        else:
+            for key, value in mch_ant_after.items():
+                self.assertEqual(int(value[0][0]) - int(mch_ant_bef[key][0][0]),
+                                 -int(mach_pay_up_obj.trans_amt_dict[key]),
+                                 msg='子商户号为:%s的商户，对比子商户金额时 请求后的金额：%s -  请求前的金额 %s 不等于 预期金额：%s' % (
+                                     key, value[0][0], mch_ant_bef[key][0][0], mach_pay_up_obj.trans_amt_dict[key]))
 
     @staticmethod
     def mch_sttled_amt(self, settled_ant_aft, settled_ant_bef, mach_pay_up_obj):
@@ -122,7 +130,7 @@ class Handle(object):
                              msg='在途表记录金额出现错误%s != %s' % (int(on_way_amt), int(on_way_actual_amt)))
 
     @staticmethod
-    def has_amt_prepay(self, amt_info_after,mach_pay_up_obj):
+    def has_amt_prepay(self, amt_info_after, mach_pay_up_obj):
         """校验准备金明细是否插入记录"""
         self.assertNotEqual(0, len(amt_info_after.get(Constants.TableName.HIS_ACCNT_PREPAY)),
                             msg='准备金明细表中没有插入数据，查出条目数为0')
@@ -160,7 +168,7 @@ class Handle(object):
         Handle.public_assert(self, html, excepted)
         if part.__eq__(Constants.RESULT.TRUE):
             return
-        Handle.mch_amt_assert(self, mch_ant_after, mch_ant_bef, mach_pay_up_obj)
+        Handle.mch_amt_assert(self, mch_ant_after, mch_ant_bef, mach_pay_up_obj, button='pay')
         Handle.all_type_mch_len_amt_assert(self, mach_pay_up_obj, amt_info_after, type='pay')
 
     @staticmethod
@@ -170,7 +178,7 @@ class Handle(object):
         Handle.public_assert(self, html, excepted)
         if part.__eq__(Constants.RESULT.TRUE):
             return
-        Handle.mch_amt_assert(self, mch_ant_after, mch_ant_bef, mach_pay_up_obj)  # 校验子商户余额
+        Handle.mch_amt_assert(self, mch_ant_after, mch_ant_bef, mach_pay_up_obj, button='refund')  # 校验子商户余额
         Handle.mch_sttled_amt(self, settled_ant_aft, settled_ant_bef, mach_pay_up_obj)  # 校验子商户可结算金额
         Handle.all_type_mch_len_amt_assert(self, mach_pay_up_obj, amt_info_after, type='refund')  # 校验数据数量和在途的数据准确性
 
@@ -183,4 +191,4 @@ class Handle(object):
             return
         Handle.mch_amt_assert(self, mch_ant_after, mch_ant_bef, mach_pay_up_obj)  # 校验子商户和准备金账户的余额
         Handle.mch_promotion_sttled_amt(self, settled_ant_aft, settled_ant_bef, mach_pay_up_obj)  # 校验准备金商户的可结算金额
-        Handle.has_amt_prepay(self, amt_info_after,mach_pay_up_obj)  # 校验准备金明细是否插入记录
+        Handle.has_amt_prepay(self, amt_info_after, mach_pay_up_obj)  # 校验准备金明细是否插入记录
