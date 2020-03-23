@@ -2,7 +2,7 @@ class Config:
     name = '测试'
     age = '18'
 
-
+# 哈哈哈哈！
 def encode(func):
     def wrapper(*args, **kwargs):
         print('encode')
@@ -10,7 +10,7 @@ def encode(func):
 
     return wrapper
 
-#123456
+
 class MyClass:
     __instance = None
 
