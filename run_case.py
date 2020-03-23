@@ -40,5 +40,5 @@ class RunCase(object):
 
 
 if __name__ == '__main__':
-    end_path = sys.argv[1]
+    end_path = 'machaccnt_pay_dispatch'
     RunCase.run(end_path)

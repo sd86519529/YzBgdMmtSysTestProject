@@ -1,7 +1,6 @@
 import time
 from common.constants import Constants
 from common.config_manager import ConfigManager
-import datetime
 
 
 class Base(object):
@@ -63,10 +62,17 @@ class Base(object):
     def count_charge(trans_amt, amount):
         # todo:费率的方案暂时没定，到时候需要修改
         """计算手续费   trans_amt订单总金额  amount子商户金额 默认支付渠道29999 费率百分之1"""
-        print(trans_amt)
-        print(amount)
         charge = round(int(trans_amt) * 0.01)  # 计算手续费
         return amount - charge
+
+    @staticmethod
+    def promotion_count(amt_list, trans_amt_dict, mch_act_no_list):
+        amt = 0
+        for am in amt_list:
+            amt -= int(am)
+        trans_amt_dict['T0020181229115338000001'] = amt
+        mch_act_no_list.append('T0020181229115338000001')
+        return trans_amt_dict, mch_act_no_list
 
 
 if __name__ == '__main__':

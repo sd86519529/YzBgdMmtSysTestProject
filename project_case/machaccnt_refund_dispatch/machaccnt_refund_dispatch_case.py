@@ -5,7 +5,7 @@ from common.logger import Logger
 from common.constants import Constants
 from common.read_excle import ReadExl
 from common.request_base import RequestBase
-from data_structure.precondition import Precondition
+from data_structure.precodition_all.precondition import Precondition
 from data_structure.handle import Handle
 from data_structure.clearing import Clearing
 from model.machaccnt_pay_dispatch_model import MachPayDispatchUp
@@ -24,8 +24,6 @@ flow_not_change_refund = ReadExl.screen_case('退款记账正常校验测试用�
 class MachRefundDispatch(unittest.TestCase):
     """
     退款记账测试用例
-    1.该用例包含所有支付记账不含手续费的商户组合流程测试
-    2.包含所有异常字段的验证
     """
 
     @classmethod

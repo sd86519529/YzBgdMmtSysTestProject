@@ -3,6 +3,7 @@
 EXCLE:
   MCHACCNT_PAY_DISPATCH: machaccnt_pay_dispatch,支付记账接口测试用例.xlsx
   MCHACCNT_REFUND_DISPATCH: machaccnt_pay_dispatch,退款记账接口测试用例.xlsx
+  MCHACCNT_PROMOTION_DISPATCH: machaccnt_pay_dispatch,活动记账接口测试用例.xlsx
 
 # 接口请求时商户号对应的MD5TOKEN加密
 MD5TOKEN:
@@ -23,5 +24,7 @@ SUBMERCHANTS:
   MUCSUB_3: T0020200303191947000001  # 子商户
   PROFIT_1: T0020181229115338000002  # 分润商户
   PROFIT_2: T0020200312145520000024  # 分润商户
+  PREPAY_1: T0020181229115338000001  # 准备金账户
+  PREPAY_2: T0020181229191337000001  # 准备金备用账户
 
 
