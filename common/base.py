@@ -1,3 +1,4 @@
+import json
 import time
 from common.constants import Constants
 from common.config_manager import ConfigManager
@@ -74,6 +75,14 @@ class Base(object):
         mch_act_no_list.append('T0020181229115338000001')
         return trans_amt_dict, mch_act_no_list
 
+    @staticmethod
+    def get_trans_no(exc_data):
+        """获取trans_no"""
+        data = exc_data['data']
+        if not isinstance(data, dict):
+            data = json.loads(exc_data['data'])
+        trans_no = data.get('biz_content').get('trans_no')  # 获取支付对账请求中的trans_no
+        return trans_no
 
 if __name__ == '__main__':
     pass

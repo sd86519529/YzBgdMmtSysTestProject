@@ -24,7 +24,9 @@ class Handle(object):
     def machaccnt_pay_dispatch_handle(exc_data):
         """请求数据处理"""
         data = exc_data['data']
-        exc_data['data'] = Handle.public_handle(data, exc_data)
+        data = Handle.public_handle(data, exc_data)
+        print('请求data::::>>' + str(data))
+        exc_data['data'] = data
         return exc_data
 
     @staticmethod

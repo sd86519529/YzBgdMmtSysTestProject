@@ -48,6 +48,11 @@ class SqlSave(object):
         ConnectionMysql().execute_db(sql)
 
     @staticmethod
+    def delete_amt_info_to_order_id(table_name, trans_no):
+        sql = "delete from %s where trans_no = '%s'" % (table_name, trans_no)
+        ConnectionMysql().execute_db(sql)
+
+    @staticmethod
     def delete_mch_accnt_balance_record(oder_id):
         """
         清理事前余额记录表

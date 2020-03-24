@@ -51,7 +51,7 @@ class MachPromotionDispatch(unittest.TestCase):
                                                    self.amt_info_after, settled_ant_bef, settled_ant_aft)
 
     def tearDown(self):
-        Clearing.machaccnt_pay_dispatch_clear(self.amt_info_after, self.mach_pay_up_obj)
+        Clearing.machaccnt_promotion_dispatch_clear(self.amt_info_after, self.mach_pay_up_obj)
         log.info('********************************测试结束 -- 数据清理完成 --********************************************')
         log.info('******************************** -- 测试结束 -- ********************************************')
         log.info('\r\n\r\n\r\n\r\n')

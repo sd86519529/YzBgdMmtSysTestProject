@@ -6,9 +6,9 @@ from common.constants import Constants
 from common.read_excle import ReadExl
 from common.request_base import RequestBase
 from common.config_manager import ConfigManager
+from data_structure.clearing import Clearing
 from data_structure.precodition_all.precondition import Precondition
 from data_structure.handle import Handle
-
 
 log = Logger('MachPayDispatch').get_log()
 
@@ -75,14 +75,15 @@ class MachPromotionDispatch(unittest.TestCase):
 
     def err_public(self, data):
         log.info('准备开始执行：^^^^^ %s ^^^^^ 编号的测试用例' % data['编号'])
-        after_treatment_data = Handle.machaccnt_pay_dispatch_handle(data)
-        log.info('参数化处理后的测试数据为:--%s' % after_treatment_data)
-        res, html = RequestBase.send_request(**after_treatment_data)  # 发送请求
+        self.after_treatment_data = Handle.machaccnt_pay_dispatch_handle(data)
+        log.info('参数化处理后的测试数据为:--%s' % self.after_treatment_data)
+        res, html = RequestBase.send_request(**self.after_treatment_data)  # 发送请求
         log.info('本次请求结果为%s' % html)
-        excepted = json.loads(after_treatment_data['excepted_code'])
+        excepted = json.loads(self.after_treatment_data['excepted_code'])
         Handle.machaccnt_promotion_dispatch_assert(self, html, excepted, part=Constants.RESULT.TRUE)
 
     def tearDown(self):
+        Clearing.err_data_clear(self.after_treatment_data)
         log.info('******************************** -- 测试结束 -- ********************************************')
         log.info('\r\n\r\n\r\n\r\n')
 
