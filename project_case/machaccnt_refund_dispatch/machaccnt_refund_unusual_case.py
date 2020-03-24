@@ -35,17 +35,15 @@ class MachRefundUnusual(unittest.TestCase):
     def test_unusual_parameter(self, unusual_parameter):
         """异常参数校验方法"""
         log.info('准备开始执行：^^^^^ %s ^^^^^ 编号的测试用例' % unusual_parameter['编号'])
-        after_treatment_data = Handle.machaccnt_pay_dispatch_handle(unusual_parameter)
-        mach_pay_up_obj = MachPayDispatchUp(after_treatment_data)
-        log.info('参数化处理后的测试数据为:--%s' % after_treatment_data)
-        res, html = RequestBase.send_request(**after_treatment_data)  # 发送请求
+        self.after_treatment_data = Handle.machaccnt_pay_dispatch_handle(unusual_parameter)
+        log.info('参数化处理后的测试数据为:--%s' % self.after_treatment_data)
+        res, html = RequestBase.send_request(**self.after_treatment_data)  # 发送请求
         log.info('==============================本次请求结果为:::%s' % html)
-        amt_info_after, mch_ant_after, settled_ant_aft = Precondition.mct_refund_dispatch_pre(mach_pay_up_obj)
-        Clearing.machaccnt_refund_dispatch_clear(amt_info_after, mach_pay_up_obj)
-        excepted = json.loads(after_treatment_data['excepted_code'])
+        excepted = json.loads(self.after_treatment_data['excepted_code'])
         Handle.machaccnt_refund_dispatch_assert(self, html, excepted, part=True)
 
     def tearDown(self):
+        Clearing.err_data_clear(self.after_treatment_data)
         log.info('******************************** -- 测试结束 -- ********************************************')
         log.info('\r\n\r\n\r\n\r\n')
 
