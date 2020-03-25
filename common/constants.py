@@ -50,7 +50,7 @@ class Constants(object):
                                                    {"order_no": "test10", "amount": 1000, "dispatch_event": "coupon",
                                                     "mch_accnt_no": "T0020200303191941000000"},
                                                    {"order_no": "test11", "amount": 1000, "dispatch_event": "coupon",
-                                                    "mch_accnt_no": "T0020181229184441000000"}]},
+                                                    "mch_accnt_no": "T0020181229115338000002"}]},
                                "biz_type": "mchaccnt.promotion.pay.dispatch",
                                "out_trans_no": "225295c2068ae5405cada7edf1670749a6", "sign_type": "MD5",
                                "timestamp": "20191028022240", "mch_no": "MH20181229115220NBUu"}}

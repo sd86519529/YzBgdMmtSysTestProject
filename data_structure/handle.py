@@ -83,7 +83,7 @@ class Handle(object):
         for key, value in settled_ant_aft.items():
             self.assertEqual(int(value[0][0]) - int(settled_ant_bef[key][0][0]),
                              -(int(mach_pay_up_obj.trans_amt_dict[key])),
-                             msg='子商户号为:%s的商户，对比子商户可结算金额时 请求前的金额：%s -  请求后的金额 %s 不等于 预期金额：%s' % (
+                             msg='子商户号为:%s的商户，对比子商户可结算金额时 请求前的金额：%s -  请求后的金额 %s 不等于 预期金额：-%s' % (
                                  key, value[0][0], settled_ant_bef[key][0][0], mach_pay_up_obj.trans_amt_dict[key]))
 
     @staticmethod
@@ -94,7 +94,7 @@ class Handle(object):
                 if key.__eq__(ConfigManager.get_service(Constants.SubMerchant.PREPAY['prepay_1'])):
                     self.assertEqual(int(value[0][0]) - int(settled_ant_bef[key][0][0]),
                                      int(mach_pay_up_obj.trans_amt_dict[key]),
-                                     msg='准备金账户号为:%s的商户，对比子商户可结算金额时 请求后的金额：%s -  请求前的金额 %s 不等于 预期金额：%s' % (
+                                     msg='准备金账户号为:%s的商户，对比子商户可结算金额时 请求后的金额：%s -  请求前的金额 %s 不等于 预期金额：-%s' % (
                                          key, value[0][0], settled_ant_bef[key][0][0],
                                          mach_pay_up_obj.trans_amt_dict[key]))
                 continue

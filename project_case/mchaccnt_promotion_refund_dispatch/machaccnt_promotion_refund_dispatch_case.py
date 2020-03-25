@@ -18,8 +18,8 @@ flow_not_change_Promotion = ReadExl.screen_case('活动记退款账正常流程�
 @ddt.ddt
 class MachPromotionRefundDispatch(unittest.TestCase):
     """
-    活动记账测试用例: <br>
-    1>>活动金额记账正常流程测试 test_flow_promotion
+    活动退款测试用例: <br>
+    1>>活动金额退款正常流程测试 test_flow_promotion
     """
 
     def setUp(self):
