@@ -1,5 +1,5 @@
 from common.constants import Constants
-from common.config_manager import ConfigManager
+from common.request_base import RequestBase
 from model.machaccnt_pay_dispatch_model import MachPayDispatchDown
 from data_structure.sql_save import SqlSave
 
@@ -80,5 +80,14 @@ class Precondition(object):
         """
         SqlSave.update_remain_amt(button)
 
-    if __name__ == '__main__':
-        pass
+    @staticmethod
+    def mct_promotion_refund_pre():
+        """
+        活动退款记账时需要提前准备一条活动记账的准备数据
+        :return:
+        """
+        RequestBase.send_request(**Constants.PRE_DATA.PRO_REFUND_DATA)
+
+
+if __name__ == '__main__':
+    Precondition.mct_promotion_refund_pre()
