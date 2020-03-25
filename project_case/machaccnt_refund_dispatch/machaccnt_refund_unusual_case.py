@@ -8,7 +8,6 @@ from common.request_base import RequestBase
 from data_structure.precodition_all.precondition import Precondition
 from data_structure.handle import Handle
 from data_structure.clearing import Clearing
-from model.machaccnt_pay_dispatch_model import MachPayDispatchUp
 
 log = Logger('MachPayDispatch').get_log()
 

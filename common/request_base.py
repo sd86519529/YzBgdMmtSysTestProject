@@ -22,5 +22,7 @@ class RequestBase(object):
         """
 
         res, html = RequestManager.send_requests(**kwargs)
+        print('---------------------------------------------<br>')
         print('本次请求返回:::>>' + str(html))
+        print('---------------------------------------------<br>')
         return res, html

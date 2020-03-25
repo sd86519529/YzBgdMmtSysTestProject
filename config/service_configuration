@@ -4,6 +4,7 @@ EXCLE:
   MCHACCNT_PAY_DISPATCH: machaccnt_pay_dispatch,支付记账接口测试用例.xlsx
   MCHACCNT_REFUND_DISPATCH: machaccnt_pay_dispatch,退款记账接口测试用例.xlsx
   MCHACCNT_PROMOTION_DISPATCH: machaccnt_pay_dispatch,活动记账接口测试用例.xlsx
+  MCHACCNT_PROMOTION_REFUND_DISPATCH: machaccnt_pay_dispatch,活动退款记账接口测试用例.xlsx
 
 # 接口请求时商户号对应的MD5TOKEN加密
 MD5TOKEN:

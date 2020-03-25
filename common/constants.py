@@ -9,7 +9,7 @@ class Constants(object):
         CS = 'MD5TOKEN.BUu'  # 测试
 
     class Merchant:
-        SW = 'MERCHANT.MCHNO'  # 顺网
+        CS = 'MERCHANT.MCHNO'  # 测试商户
 
     class SubMerchant:
         MUCSUB = {'mucsub_1': 'SUBMERCHANTS.MUCSUB_1', 'mucsub_2': 'SUBMERCHANTS.MUCSUB_2',
@@ -26,6 +26,7 @@ class Constants(object):
         PAY = 'MCHACCNT_PAY_DISPATCH'  # 记账用例储存管理
         REFUND = 'MCHACCNT_REFUND_DISPATCH'  # 退款用例储存管理
         PROMOTION = 'MCHACCNT_PROMOTION_DISPATCH'  # 活动记账用例储存管理
+        PROMOTION_REFUND = 'MCHACCNT_PROMOTION_REFUND_DISPATCH'  # 活动退款记账用例储存管理
 
     class TableName:
         HIS_ACCNT_MCH_SUB = 'his_accnt_mch_sub'  # 子商户表
@@ -40,3 +41,16 @@ class Constants(object):
     class CHARGE:  # 是否开启子商户承担手续费
         TRUE = '2'
         FALSE = '1'
+
+    class PRE_DATA:
+        PRO_REFUND_DATA = {"请求类型": '',
+                           "data": {
+                               "biz_content": {"trans_no": "MH20181229115220NBUu", "trans_time": "2020-01-11 14:35:41",
+                                               "split_accnt_detail": [
+                                                   {"order_no": "test10", "amount": 1000, "dispatch_event": "coupon",
+                                                    "mch_accnt_no": "T0020200303191941000000"},
+                                                   {"order_no": "test11", "amount": 1000, "dispatch_event": "coupon",
+                                                    "mch_accnt_no": "T0020181229184441000000"}]},
+                               "biz_type": "mchaccnt.promotion.pay.dispatch",
+                               "out_trans_no": "225295c2068ae5405cada7edf1670749a6", "sign_type": "MD5",
+                               "timestamp": "20191028022240", "mch_no": "MH20181229115220NBUu"}}

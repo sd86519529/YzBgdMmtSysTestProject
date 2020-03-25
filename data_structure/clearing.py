@@ -33,6 +33,7 @@ class Clearing(object):
 
     @staticmethod
     def err_data_clear(exe_data):
+        """特殊清理方法"""
         trans_no = Base.get_trans_no(exe_data)
         table_name = [Constants.TableName.HIS_ACCNT_PREPAY, Constants.TableName.HIS_ACCNT_ONWAY,
                       Constants.TableName.HIS_ACCNT_PROFILE, Constants.TableName.HIS_ACCNT_MCH_SUB]
@@ -41,3 +42,12 @@ class Clearing(object):
             SqlSave.delete_amt_info(table_name=table_name, trans_no=trans_no)
         for id in oder_id:
             SqlSave.delete_mch_accnt_balance_record(oder_id=id)
+
+    @staticmethod
+    def machaccnt_promotion_refund_dispatch_clear(exe_data):
+        """活动退款记账数据清理"""
+        trans_no = Base.get_trans_no(exe_data)
+        table_name = [Constants.TableName.HIS_ACCNT_PREPAY, Constants.TableName.HIS_ACCNT_PROFILE,
+                      Constants.TableName.HIS_ACCNT_MCH_SUB]
+        for t_n in table_name:
+            SqlSave.delete_amt_info(table_name=t_n, trans_no=trans_no)

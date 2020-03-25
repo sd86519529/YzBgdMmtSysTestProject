@@ -87,15 +87,24 @@ class Handle(object):
                                  key, value[0][0], settled_ant_bef[key][0][0], mach_pay_up_obj.trans_amt_dict[key]))
 
     @staticmethod
-    def mch_promotion_sttled_amt(self, settled_ant_aft, settled_ant_bef, mach_pay_up_obj):
-        """准备金账户在请求前和请求后可结算金额变化"""
+    def mch_promotion_sttled_amt(self, settled_ant_aft, settled_ant_bef, mach_pay_up_obj, button='pay'):
+        """准备金账户或子商户在请求前和请求后可结算金额变化"""
         for key, value in settled_ant_aft.items():
-            if key.__eq__('T0020181229115338000001'):
-                self.assertEqual(int(value[0][0]) - int(settled_ant_bef[key][0][0]),
-                                 int(mach_pay_up_obj.trans_amt_dict[key]),
-                                 msg='准备金账户号为:%s的商户，对比子商户可结算金额时 请求后的金额：%s -  请求前的金额 %s 不等于 预期金额：%s' % (
-                                     key, value[0][0], settled_ant_bef[key][0][0], mach_pay_up_obj.trans_amt_dict[key]))
-            continue
+            if button.__eq__('pay'):
+                if key.__eq__(ConfigManager.get_service(Constants.SubMerchant.PREPAY['prepay_1'])):
+                    self.assertEqual(int(value[0][0]) - int(settled_ant_bef[key][0][0]),
+                                     int(mach_pay_up_obj.trans_amt_dict[key]),
+                                     msg='准备金账户号为:%s的商户，对比子商户可结算金额时 请求后的金额：%s -  请求前的金额 %s 不等于 预期金额：%s' % (
+                                         key, value[0][0], settled_ant_bef[key][0][0],
+                                         mach_pay_up_obj.trans_amt_dict[key]))
+                continue
+            else:
+                if key != ConfigManager.get_service(Constants.SubMerchant.PREPAY['prepay_1']):
+                    self.assertEqual(int(value[0][0]) - int(settled_ant_bef[key][0][0]),
+                                     -int(mach_pay_up_obj.trans_amt_dict[key]),
+                                     msg='商户账户号为:%s的商户，对比子商户可结算金额时 请求后的金额：%s -  请求前的金额 %s 不等于 预期金额：%s' % (
+                                         key, value[0][0], settled_ant_bef[key][0][0],
+                                         mach_pay_up_obj.trans_amt_dict[key]))
 
     @staticmethod
     def amt_dict_assert(self, v, k, amt_info_after, on_way_amt, type):
@@ -132,10 +141,14 @@ class Handle(object):
                              msg='在途表记录金额出现错误%s != %s' % (int(on_way_amt), int(on_way_actual_amt)))
 
     @staticmethod
-    def has_amt_prepay(self, amt_info_after, mach_pay_up_obj):
+    def has_amt_prepay(self, amt_info_after, mach_pay_up_obj, button='pay'):
         """校验准备金明细是否插入记录"""
-        self.assertNotEqual(0, len(amt_info_after.get(Constants.TableName.HIS_ACCNT_PREPAY)),
-                            msg='准备金明细表中没有插入数据，查出条目数为0')
+        if button.__eq__('pay'):
+            self.assertNotEqual(0, len(amt_info_after.get(Constants.TableName.HIS_ACCNT_PREPAY)),
+                                msg='准备金明细表中没有插入数据，查出条目数为0')
+        else:
+            # 若为活动记账退款，则准备金明细表中记录必大于两条
+            self.assertGreater(len(amt_info_after.get(Constants.TableName.HIS_ACCNT_PREPAY)), 2)
         for k, v in mach_pay_up_obj.amt_dict.items():
             # 比对不同子商户表的数据条目数是否正确
             # 对比请求之后查询出来的不同子商户条目数是否正确而
@@ -194,3 +207,15 @@ class Handle(object):
         Handle.mch_amt_assert(self, mch_ant_after, mch_ant_bef, mach_pay_up_obj)  # 校验子商户和准备金账户的余额
         Handle.mch_promotion_sttled_amt(self, settled_ant_aft, settled_ant_bef, mach_pay_up_obj)  # 校验准备金商户的可结算金额
         Handle.has_amt_prepay(self, amt_info_after, mach_pay_up_obj)  # 校验准备金明细是否插入记录
+
+    @staticmethod
+    def machaccnt_promotion_refund_dispatch_assert(self, html, excepted, mach_pay_up_obj=None, mch_ant_bef=None,
+                                                   mch_ant_after=None, amt_info_after=None, settled_ant_bef=None,
+                                                   settled_ant_aft=None, part=Constants.RESULT.FALSE):
+        Handle.public_assert(self, html, excepted)
+        if part.__eq__(Constants.RESULT.TRUE):
+            return
+        Handle.mch_amt_assert(self, mch_ant_after, mch_ant_bef, mach_pay_up_obj, button='refund')  # 校验子商户和准备金账户的余额
+        Handle.mch_promotion_sttled_amt(self, settled_ant_aft, settled_ant_bef, mach_pay_up_obj,
+                                        button='refund')  # 校验准备金商户的可结算金额
+        Handle.has_amt_prepay(self, amt_info_after, mach_pay_up_obj, button='refund')  # 校验准备金明细是否插入记录

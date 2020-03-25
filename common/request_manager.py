@@ -24,7 +24,7 @@ class RequestManager(object):
         format_data = kwargs.get('data')
         if isinstance(format_data, str):
             format_data = json.loads(format_data)
-        format_data['mch_no'] = ConfigManager.get_service(Constants.Merchant.SW)
+        format_data['mch_no'] = ConfigManager.get_service(Constants.Merchant.CS)
         format_data = json.dumps(format_data)
         data['data'] = format_data
         log.info("==============================本次请求data:::%s" % format_data)

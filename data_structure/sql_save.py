@@ -69,7 +69,7 @@ class SqlSave(object):
         """
         sql = "update mch_other_config set fee_undertaker='%s',is_charge='Y' where mch_no = '%s'" % (
             is_change, ConfigManager.get_service(
-                Constants.Merchant.SW))
+                Constants.Merchant.CS))
         ConnectionMysql().execute_db(sql)
 
     @staticmethod
