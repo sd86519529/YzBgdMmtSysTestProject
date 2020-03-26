@@ -1,6 +1,12 @@
 class Constants(object):
     """静态资源管理类"""
 
+    class PutBug:
+        BUTTON = 'CD_PUTBUG.BUTTON'  # 是否提交bug到禅道
+
+    class CdAdmin:
+        JW = {'username': 'CD_CONFIG.jw_username', 'password': 'CD_CONFIG.jw_password'}
+
     class UserAgent:
         CHROME = "USER_AGENT.CHROME_USER_AGENT"
 

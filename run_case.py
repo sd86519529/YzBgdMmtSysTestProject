@@ -51,5 +51,5 @@ class RunCase(object):
 
 
 if __name__ == '__main__':
-    end_path = '123'
+    end_path = '支付记账测试用例'
     RunCase.run_all()

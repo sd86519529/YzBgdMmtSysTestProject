@@ -6,7 +6,7 @@ from common.constants import Constants
 from common.read_excle import ReadExl
 from common.request_base import RequestBase
 from common.config_manager import ConfigManager
-from data_structure.clearing import Clearing
+from data_structure.clearing_all.clearing import Clearing
 from data_structure.precodition_all.precondition import Precondition
 from data_structure.handle import Handle
 

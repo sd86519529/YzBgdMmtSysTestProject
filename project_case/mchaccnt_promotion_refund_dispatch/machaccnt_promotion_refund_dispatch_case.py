@@ -7,13 +7,14 @@ from common.read_excle import ReadExl
 from common.request_base import RequestBase
 from data_structure.precodition_all.precondition import Precondition
 from data_structure.handle import Handle
-from data_structure.clearing import Clearing
+from data_structure.clearing_all.clearing import Clearing
 from model.machaccnt_pay_dispatch_model import MachPayDispatchUp
 
 log = Logger('MachPayDispatch').get_log()
 
 exa_and_approve_list = ReadExl(Constants.EXL.PROMOTION_REFUND, sheet=0).obtain_data()
 flow_not_change_Promotion = ReadExl.screen_case('活动记退款账正常流程调用测试用例', exa_and_approve_list)
+
 
 @ddt.ddt
 class MachPromotionRefundDispatch(unittest.TestCase):
@@ -48,8 +49,8 @@ class MachPromotionRefundDispatch(unittest.TestCase):
         log.info('本次数据库查询实际结果返回为 amt_info_after:%s \n mch_ant_after:%s' % (self.amt_info_after, mch_ant_after))
         # 进行结果校验对比，对比内容为excl中的验证点
         Handle.machaccnt_promotion_refund_dispatch_assert(self, html, excepted, self.mach_pay_up_obj, mch_ant_bef,
-                                                   mch_ant_after,
-                                                   self.amt_info_after, settled_ant_bef, settled_ant_aft)
+                                                          mch_ant_after,
+                                                          self.amt_info_after, settled_ant_bef, settled_ant_aft)
 
     def tearDown(self):
         Clearing.machaccnt_promotion_refund_dispatch_clear(self.after_treatment_data)
