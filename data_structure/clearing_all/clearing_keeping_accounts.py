@@ -3,7 +3,7 @@ from data_structure.sql_save import SqlSave
 from common.constants import Constants
 
 
-class Clearing(object):
+class ClearingKeepingAccounts(object):
     """
     本类用于数据清理
     根据不同接口测试条件来进行sql清理或接口层清理

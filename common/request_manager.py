@@ -13,11 +13,12 @@ class RequestManager(object):
 
     @staticmethod
     def send_requests(**kwargs):
-        url = ConfigManager.get_service(Constants.HOST.TEST)  # 请求路由地址
+        url = ConfigManager.get_service(Constants.HOST.TEST)
         # todo 关于接口签名认证的方法可以做进一步处理如：直接去数据库查询等。
         headers = {'User-Agent': ConfigManager.get_basic(Constants.UserAgent.CHROME)}  # 请求头默认带浏览器chrome 可配置
         headers = headers if kwargs.get('HEADERS') is None else dict(headers, **kwargs.get('HEADERS'))  # 和传入的请求头合并
-        method = 'post' if kwargs.get('请求类型') is '' else kwargs.get('METHOD')
+        # method = 'post' if kwargs.get('请求类型') is '' else kwargs.get('METHOD')
+        method = 'post'
         allow_redirects = True if kwargs.get('allow_redirects') is None else kwargs.get('allow_redirects')  # 是否重定向
         timeout = 500 if kwargs.get('time_out') is None else kwargs.get('time_out')  # 超时时间的设置
         data = dict()

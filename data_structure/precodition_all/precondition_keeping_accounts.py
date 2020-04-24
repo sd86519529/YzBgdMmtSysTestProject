@@ -4,7 +4,7 @@ from model.machaccnt_pay_dispatch_model import MachPayDispatchDown
 from data_structure.sql_save import SqlSave
 
 
-class Precondition(object):
+class PreconditionKeepingAccounts(object):
     """
         本类用于前置条件构造
         对于不同的用例所需要的前置条件进行接口层面的构造准备或sql层面的构造准备
@@ -88,6 +88,11 @@ class Precondition(object):
         """
         RequestBase.send_request(**Constants.PRE_DATA.PRO_REFUND_DATA)
 
+    @staticmethod
+    def mct_promotion_set_channel(channel):
+        """更改测试商户手续费费率"""
+        SqlSave.mch_update_channel_rate_real(channel)
+
 
 if __name__ == '__main__':
-    Precondition.mct_promotion_refund_pre()
+    pass

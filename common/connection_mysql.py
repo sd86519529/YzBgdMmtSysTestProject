@@ -47,4 +47,4 @@ class ConnectionMysql(object):
 
 if __name__ == '__main__':
     # 测试
-    pass
+    ConnectionMysql()

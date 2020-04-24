@@ -2,6 +2,7 @@ import json
 import time
 from common.constants import Constants
 from common.config_manager import ConfigManager
+from data_structure.sql_save import SqlSave
 
 
 class Base(object):
@@ -63,7 +64,9 @@ class Base(object):
     def count_charge(trans_amt, amount):
         # todo:费率的方案暂时没定，到时候需要修改
         """计算手续费   trans_amt订单总金额  amount子商户金额 默认支付渠道29999 费率百分之1"""
-        charge = round(int(trans_amt) * 0.01)  # 计算手续费
+        a = SqlSave.select_change()[0][0]
+        charge = round(int(trans_amt) * float(a))  # 计算手续费
+        print('计算手续费后的金额为', charge)
         return amount - charge
 
     @staticmethod
@@ -84,5 +87,7 @@ class Base(object):
         trans_no = data.get('biz_content').get('trans_no')  # 获取支付对账请求中的trans_no
         return trans_no
 
+
 if __name__ == '__main__':
-    pass
+    a = {'123':123}
+    print(a.get('222'))

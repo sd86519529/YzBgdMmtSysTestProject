@@ -19,6 +19,8 @@ class HandleKeepingAccounts(object):
                 i['mch_accnt_no'] = ConfigManager.get_service(Constants.SubMerchant.MUCSUB[i.get('mch_accnt_no')])
             if i.get('mch_accnt_no') in Constants.SubMerchant.PROFIT.keys():
                 i['mch_accnt_no'] = ConfigManager.get_service(Constants.SubMerchant.PROFIT[i.get('mch_accnt_no')])
+            if i.get('mch_accnt_no') in Constants.SubMerchant.PREPAY.keys():
+                i['mch_accnt_no'] = ConfigManager.get_service(Constants.SubMerchant.PREPAY[i.get('mch_accnt_no')])
         return data
 
     @staticmethod
@@ -58,8 +60,12 @@ class HandleKeepingAccounts(object):
             self.assertEqual(str(html.get('code')), str(excepted['code']),
                              msg='接口请求code %s != %s' % (html.get('code'), excepted['code']))
         if excepted.get('message') is not None:
-            self.assertEqual(html.get('message'), excepted['message'],
-                             msg='接口请求message: %s != %s' % (html.get('message'), excepted['message']))
+            if len(excepted.get('message').split('-')) > 1:  # 判断字符串在不在里面
+                self.assertIn(excepted['message'][0], html.get('message'),
+                              msg='接口请求message: %s 不在 %s 里面' % (excepted['message'], html.get('message')))
+            else:
+                self.assertEqual(html.get('message'), excepted['message'],
+                                 msg='接口请求message: %s != %s' % (html.get('message'), excepted['message']))
 
     @staticmethod
     def mch_amt_assert(self, mch_ant_after, mch_ant_bef, mach_pay_up_obj, button='pay'):
@@ -195,8 +201,10 @@ class HandleKeepingAccounts(object):
                 HandleKeepingAccounts.mch_amt_assert(self, mch_ant_after, mch_ant_bef, mach_pay_up_obj, button='pay')
                 HandleKeepingAccounts.all_type_mch_len_amt_assert(self, mach_pay_up_obj, amt_info_after, type='pay')
             except Exception as msg:
-                severity, module, title, pri, steps = send_bug_cd.data_util(self.after_treatment_data, html)
-                send_bug_cd.send_bug_to_cd(severity=severity, module=module, title=title, pri=pri, steps=steps)
+                severity, module, title, pri, steps, assignedTo = send_bug_cd.data_util(self.after_treatment_data, html,
+                                                                                        msg)
+                send_bug_cd.send_bug_to_cd(severity=severity, module=module, title=title, pri=pri, steps=steps,
+                                           assignedTo=assignedTo)
                 raise msg
 
     @staticmethod
@@ -225,8 +233,10 @@ class HandleKeepingAccounts(object):
                 HandleKeepingAccounts.all_type_mch_len_amt_assert(self, mach_pay_up_obj, amt_info_after,
                                                                   type='refund')  # 校验数据数量和在途的数据准确性
             except Exception as msg:
-                severity, module, title, pri, steps = send_bug_cd.data_util(self.after_treatment_data, html)
-                send_bug_cd.send_bug_to_cd(severity=severity, module=module, title=title, pri=pri, steps=steps)
+                severity, module, title, pri, steps, assignedTo = send_bug_cd.data_util(self.after_treatment_data, html,
+                                                                                        msg)
+                send_bug_cd.send_bug_to_cd(severity=severity, module=module, title=title, pri=pri, steps=steps,
+                                           assignedTo=assignedTo)
                 raise msg
 
     @staticmethod
@@ -253,8 +263,10 @@ class HandleKeepingAccounts(object):
                                                                mach_pay_up_obj)  # 校验准备金商户的可结算金额
                 HandleKeepingAccounts.has_amt_prepay(self, amt_info_after, mach_pay_up_obj)  # 校验准备金明细是否插入记录
             except Exception as msg:
-                severity, module, title, pri, steps = send_bug_cd.data_util(self.after_treatment_data, html)
-                send_bug_cd.send_bug_to_cd(severity=severity, module=module, title=title, pri=pri, steps=steps)
+                severity, module, title, pri, steps, assignedTo = send_bug_cd.data_util(self.after_treatment_data, html,
+                                                                                        msg)
+                send_bug_cd.send_bug_to_cd(severity=severity, module=module, title=title, pri=pri, steps=steps,
+                                           assignedTo=assignedTo)
                 raise msg
 
     @staticmethod
@@ -285,6 +297,8 @@ class HandleKeepingAccounts(object):
                 HandleKeepingAccounts.has_amt_prepay(self, amt_info_after, mach_pay_up_obj,
                                                      button='refund')  # 校验准备金明细是否插入记录
             except Exception as msg:
-                severity, module, title, pri, steps = send_bug_cd.data_util(self.after_treatment_data, html)
-                send_bug_cd.send_bug_to_cd(severity=severity, module=module, title=title, pri=pri, steps=steps)
+                severity, module, title, pri, steps, assignedTo = send_bug_cd.data_util(self.after_treatment_data, html,
+                                                                                        msg)
+                send_bug_cd.send_bug_to_cd(severity=severity, module=module, title=title, pri=pri, steps=steps,
+                                           assignedTo=assignedTo)
                 raise msg

@@ -6,8 +6,8 @@ from common.constants import Constants
 from common.read_excle import ReadExl
 from common.request_base import RequestBase
 from common.config_manager import ConfigManager
-from data_structure.clearing_all.clearing import Clearing
-from data_structure.precodition_all.precondition import Precondition
+from data_structure.clearing_all.clearing_keeping_accounts import ClearingKeepingAccounts
+from data_structure.precodition_all.precondition_keeping_accounts import PreconditionKeepingAccounts
 from data_structure.handle import Handle
 
 log = Logger('MachPayDispatch').get_log()
@@ -35,12 +35,12 @@ class MachPromotionUnusual(unittest.TestCase):
         """
         异常活动金额支付流程，准备金账户有多个
         """
-        Precondition.mct_promotion_pre(button=Constants.RESULT.TRUE,
+        PreconditionKeepingAccounts.mct_promotion_pre(button=Constants.RESULT.TRUE,
                                        mch_no=ConfigManager.get_service(Constants.SubMerchant.PREPAY['prepay_1']))
-        Precondition.mct_promotion_pre(button=Constants.RESULT.TRUE,
+        PreconditionKeepingAccounts.mct_promotion_pre(button=Constants.RESULT.TRUE,
                                        mch_no=ConfigManager.get_service(Constants.SubMerchant.PREPAY['prepay_2']))
         self.err_public(flow_error_has_Promotion)
-        Precondition.mct_promotion_pre(button=Constants.RESULT.FALSE,
+        PreconditionKeepingAccounts.mct_promotion_pre(button=Constants.RESULT.FALSE,
                                        mch_no=ConfigManager.get_service(Constants.SubMerchant.PREPAY['prepay_2']))
 
     @ddt.data(*flow_error_none_Promotion)
@@ -48,12 +48,12 @@ class MachPromotionUnusual(unittest.TestCase):
         """
         异常活动金额支付流程，没有准备金账户
         """
-        Precondition.mct_promotion_pre(button=Constants.RESULT.FALSE,
+        PreconditionKeepingAccounts.mct_promotion_pre(button=Constants.RESULT.FALSE,
                                        mch_no=ConfigManager.get_service(Constants.SubMerchant.PREPAY['prepay_2']))
-        Precondition.mct_promotion_pre(button=Constants.RESULT.FALSE,
+        PreconditionKeepingAccounts.mct_promotion_pre(button=Constants.RESULT.FALSE,
                                        mch_no=ConfigManager.get_service(Constants.SubMerchant.PREPAY['prepay_1']))
         self.err_public(flow_error_none_Promotion)
-        Precondition.mct_promotion_pre(button=Constants.RESULT.TRUE,
+        PreconditionKeepingAccounts.mct_promotion_pre(button=Constants.RESULT.TRUE,
                                        mch_no=ConfigManager.get_service(Constants.SubMerchant.PREPAY['prepay_1']))
 
     @ddt.data(*flow_error_remain_amt_Promotion)
@@ -61,9 +61,9 @@ class MachPromotionUnusual(unittest.TestCase):
         """
         异常活动金额支付流程，没有准备金账户
         """
-        Precondition.mct_promotion_remain_amt_pre(Constants.RESULT.TRUE)
+        PreconditionKeepingAccounts.mct_promotion_remain_amt_pre(Constants.RESULT.TRUE)
         self.err_public(flow_error_remain_amt_Promotion)
-        Precondition.mct_promotion_remain_amt_pre(Constants.RESULT.FALSE)
+        PreconditionKeepingAccounts.mct_promotion_remain_amt_pre(Constants.RESULT.FALSE)
 
     @ddt.data(*unusual_parameter)
     def test_unusual_parameter(self, unusual_parameter):
@@ -82,7 +82,7 @@ class MachPromotionUnusual(unittest.TestCase):
         Handle.machaccnt_promotion_dispatch_assert(self, html, excepted, part=Constants.RESULT.TRUE)
 
     def tearDown(self):
-        Clearing.err_data_clear(self.after_treatment_data)
+        ClearingKeepingAccounts.err_data_clear(self.after_treatment_data)
         log.info('******************************** -- 测试结束 -- ********************************************')
         log.info('\r\n\r\n\r\n\r\n')
 

@@ -5,8 +5,8 @@ from common.logger import Logger
 from common.constants import Constants
 from common.read_excle import ReadExl
 from common.request_base import RequestBase
-from data_structure.clearing_all.clearing import Clearing
-from data_structure.precodition_all.precondition import Precondition
+from data_structure.clearing_all.clearing_keeping_accounts import ClearingKeepingAccounts
+from data_structure.precodition_all.precondition_keeping_accounts import PreconditionKeepingAccounts
 from data_structure.handle import Handle
 
 log = Logger('MachPayDispatch').get_log()
@@ -25,7 +25,7 @@ class MachPayUnusual(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """关闭子商户承担手续费"""
-        Precondition.mct_pay_channel_rate_pre(is_change=Constants.CHARGE.FALSE)
+        PreconditionKeepingAccounts.mct_pay_channel_rate_pre(is_change=Constants.CHARGE.FALSE)
 
     def setUp(self):
         log.info('******************************** -- 测试开始 -- ********************************************')
@@ -41,7 +41,7 @@ class MachPayUnusual(unittest.TestCase):
         Handle.machaccnt_pay_dispatch_assert(self, html, excepted, part=True)
 
     def tearDown(self):
-        Clearing.err_data_clear(self.after_treatment_data)
+        ClearingKeepingAccounts.err_data_clear(self.after_treatment_data)
         log.info('******************************** -- 测试结束 -- ********************************************')
         log.info('\r\n\r\n\r\n\r\n')
 
