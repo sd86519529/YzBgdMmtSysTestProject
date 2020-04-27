@@ -1,4 +1,3 @@
-from common.base import Base
 from common.config_manager import ConfigManager
 from data_structure.sql_save import SqlSave
 from common.constants import Constants

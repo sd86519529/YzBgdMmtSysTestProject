@@ -1,4 +1,5 @@
 import ftplib
+import os
 from common.config_manager import ConfigManager
 
 
@@ -14,16 +15,30 @@ class FtpConnect(object):
         f = ftplib.FTP(host=self.host)
         f.login(self.username, self.password)
         f.cwd('deposit_test')
-        print(f.nlst())
         return f
 
     def get_dir_list(self):
-        return self.f.nlst()
+        """返回ftp的文件列表和文件数量"""
+        return self.f.nlst(), len(self.f.nlst())
+
+    def delete_file(self, file_name):
+        return self.f.delete(file_name)
+
+    def get_file_size(self, file_name):
+        """获取文件大小 25kb返回为25000"""
+        return self.f.size(file_name)
+
+    def push_file_csv_on_ftp(self,path):
+        """上传csv文件到对ftp"""
+        bufsize = 1024
+        fp = open(path, 'rb')
+        self.f.storbinary('STOR ' + os.path.basename(path), fp, bufsize)
+        self.f.set_debuglevel(0)
+        self.f.close()
+        return os.path.basename(path)
 
 
 if __name__ == '__main__':
-    lis = FtpConnect().get_dir_list()
-
-    print(lis)
-    print('----------------------')
-    print(len(lis))
+    # a = FtpConnect().push_file_csv_on_ftp()
+    # print(a)
+    FtpConnect().delete_file('zfb_20200426_vuQs6pRk5GFhOfo6Lpzz.csv')

@@ -1,6 +1,15 @@
 class Constants(object):
     """静态资源管理类"""
 
+    class STATEMENT:
+        """对账单"""
+        big_zfb_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\resolvingbill\zfb_20200426_vuQs6pRk5GFhOfo6Lpzz.csv'  # 过大的对账单(zfb)
+        none_zfb_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\resolvingbill\zfb_20200417_6RygDDfSs87Ff7l0Q4xt.csv'  # 空csv文件
+        zfb_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\resolvingbill\zfb_20200422_iyUiAEjyWnw4031iDwmp.csv'  # 正常的支付宝对账单文件
+
+    class CHANNEL:
+        zfb = '2017112800223321'
+
     class MockUrl:
         SUCCESS = 'http://172.16.202.160:10008/s'
         FAIL = 'http://172.16.202.160:10008/f'
@@ -41,7 +50,7 @@ class Constants(object):
 
     class HOST:
         TEST = 'HOST.TEST'  # 测试环境
-        TIMER_TEST = 'HOST.TIMER_TEST' # 提现定时器触发
+        TIMER_TEST = 'HOST.TIMER_TEST'  # 提现定时器触发
 
     class EXL:
         PAY = 'MCHACCNT_PAY_DISPATCH'  # 记账用例储存管理

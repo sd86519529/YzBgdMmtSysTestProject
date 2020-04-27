@@ -295,8 +295,56 @@ class SqlSave(object):
         result = ConnectionMysql().select_db(sql)
         return result
 
+    @staticmethod
+    def select_download_url():
+        """获取对账单的名称"""
+        sql = "select download_url,type from download_info where mch_no = '%s'" % ConfigManager.get_service(
+            Constants.Merchant.CS)
+        result = ConnectionMysql().select_db(sql)
+        return result
+
+    @staticmethod
+    def delete_download_info():
+        sql = "delete from download_info where mch_no = '%s'" % ConfigManager.get_service(
+            Constants.Merchant.CS)
+        ConnectionMysql().execute_db(sql)
+
+    @staticmethod
+    def insert_download_info(channel, download_url, bill_data, typ, id):
+        """制造解析对账单数据"""
+        sql = "insert into download_info(id,mch_no,channel,download_url,bill_date,create_time,update_time,type,is_his_data,into_data) " \
+              "values ('%s','MH20181229115220NBUu','%s','%s','%s','2019-06-28 06:00:51','2019-06-28 06:00:51','%s',null,null)" % (
+                  id, channel, download_url, bill_data, typ)
+        ConnectionMysql().execute_db(sql)
+
+    @staticmethod
+    def delete_mch_account_details():
+        sql = "delete from mch_account_details where mch_no = '%s'" % ConfigManager.get_service(
+            Constants.Merchant.CS)
+        ConnectionMysql().execute_db(sql)
+
+    @staticmethod
+    def select_count_mch_details():
+        """获取解析对账单表中共存在多少条数据"""
+        sql = "select count(id) from mch_account_details where mch_no = '%s'" % ConfigManager.get_service(
+            Constants.Merchant.CS)
+        result = ConnectionMysql().select_db(sql)
+        return result[0][0]
+
+    @staticmethod
+    def select_into_data():
+        """获取对账单是否插入明细标志  None为没有插入 1为已经插入"""
+        sql = "select into_data from download_info where id = '99999'"
+        result = ConnectionMysql().select_db(sql)
+        return result[0][0]
+
+    @staticmethod
+    def update_into_data():
+        """修改对账单解析标识"""
+        sql = "update download_info set into_data = '1' where id = '99999'"
+        ConnectionMysql().execute_db(sql)
+
 
 if __name__ == '__main__':
-    sql = "select withdraw_status,status,remark,request_num from with_draw_info where order_no='test1'"
-    result = ConnectionMysql().select_db(sql)
-    print(result)
+    a = SqlSave.insert_download_info('2017112800223321', 'zfb_20200417_6RygDDfSs87Ff7l0Q4xt.csv', '20200426', 'zfb')
+    print(a)
