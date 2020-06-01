@@ -74,7 +74,7 @@ class MachRefundPass(unittest.TestCase):
         excepted = json.loads(self.after_treatment_data['excepted_code'])
         Handle.machaccnt_withdraw_assert(self, html, excepted, befor_dic, aft_dic)
 
-    # @unittest.skip('测试')
+    @unittest.skip('测试')
     @ddt.data(*flow_1)
     def test_flow_1(self, flow_1):
         """缓存中不存在提现记录，在数据库中存在一条orderid为test1的数据,重新请求,金额相同,状态为3。 """
@@ -97,7 +97,7 @@ class MachRefundPass(unittest.TestCase):
             raise e
         PreconditionWithdrawal.update_pay_url(pay_type='default')  # 回复默认url地址
 
-    # @unittest.skip('测试')
+    @unittest.skip('测试')
     @ddt.data(*flow_2)
     def test_flow_2(self, flow_2):
         """商户类型为分润商户的无手续费正常提现测试"""
@@ -111,7 +111,7 @@ class MachRefundPass(unittest.TestCase):
         self.flow_pass_public(data=flow_2, is_borrow_money=False, is_service_charge=False, type_befor=True,
                               type_after=False, **kwargs)
 
-    # @unittest.skip('测试')
+    @unittest.skip('测试')
     @ddt.data(*flow_3)
     def test_flow_3(self, flow_3):
         """商户类型为分润商户有手续费正常提现测试"""
@@ -130,7 +130,7 @@ class MachRefundPass(unittest.TestCase):
             raise e
         PreconditionWithdrawal.mch_update_fixed_poundage(button=Constants.RESULT.FALSE)  # 关闭提现手续费
 
-    # @unittest.skip('测试')
+    @unittest.skip('测试')
     @ddt.data(*flow_4)
     def test_flow_4(self, flow_4):
         """
@@ -149,7 +149,7 @@ class MachRefundPass(unittest.TestCase):
         result = PreconditionWithdrawal.with_draw_info()
         self.assertEqual(result, '交易成功')
 
-    # @unittest.skip('测试')
+    @unittest.skip('测试')
     @ddt.data(*flow_5)
     def test_flow_5(self, flow_5):
         """商户类型为子商户，无提现手续费，提现金额等于商户可结算余额流程测试"""
@@ -161,7 +161,7 @@ class MachRefundPass(unittest.TestCase):
         self.flow_pass_public(data=flow_5, is_borrow_money=False, is_service_charge=False, type_befor=True,
                               type_after=False, **kwargs)
 
-    # @unittest.skip('测试')
+    @unittest.skip('测试')
     @ddt.data(*flow_6)
     def test_flow_6(self, flow_6):
         """商户类型为子商户，无提现手续费，提现金额小于商户可结算余额流程测试"""
@@ -196,7 +196,7 @@ class MachRefundPass(unittest.TestCase):
         PreconditionWithdrawal.mct_update_super_money_pre(is_change=Constants.RESULT.FALSE)  # 关闭超额提现
         PreconditionWithdrawal.mch_update_fixed_poundage(button=Constants.RESULT.FALSE)  # 关闭提现手续费
 
-    # @unittest.skip('测试')
+    @unittest.skip('测试')
     @ddt.data(*flow_8)
     def test_flow_8(self, flow_8):
         """
@@ -219,7 +219,7 @@ class MachRefundPass(unittest.TestCase):
         PreconditionWithdrawal.mct_update_super_money_pre(is_change=Constants.RESULT.FALSE)  # 关闭超额提现
         PreconditionWithdrawal.mch_update_fixed_poundage(button=Constants.RESULT.FALSE)  # 关闭提现手续费
 
-    # @unittest.skip('测试')
+    @unittest.skip('测试')
     @ddt.data(*flow_9)
     def test_flow_9(self, flow_9):
         """
@@ -242,7 +242,7 @@ class MachRefundPass(unittest.TestCase):
         PreconditionWithdrawal.mct_update_super_money_pre(is_change=Constants.RESULT.FALSE)  # 关闭超额提现
         PreconditionWithdrawal.mch_update_fixed_poundage(button=Constants.RESULT.FALSE)  # 关闭提现手续费
 
-    # @unittest.skip('测试')
+    @unittest.skip('测试')
     @ddt.data(*flow_9_1)
     def test_flow_10(self, flow_9_1):
         """
@@ -265,7 +265,7 @@ class MachRefundPass(unittest.TestCase):
         PreconditionWithdrawal.mct_update_super_money_pre(is_change=Constants.RESULT.FALSE)  # 关闭超额提现
         PreconditionWithdrawal.mch_update_fixed_poundage(button=Constants.RESULT.FALSE)  # 关闭提现手续费
 
-    # @unittest.skip('测试')
+    @unittest.skip('测试')
     @ddt.data(*flow_9_2)
     def test_flow_11(self, flow_9_2):
         """
@@ -284,7 +284,7 @@ class MachRefundPass(unittest.TestCase):
             raise e
         PreconditionWithdrawal.mct_update_super_money_pre(is_change=Constants.RESULT.FALSE)  # 关闭超额提现
 
-    # @unittest.skip('测试')
+    @unittest.skip('测试')
     @ddt.data(*flow_9_3)
     def test_flow_12(self, flow_9_3):
         """
@@ -304,7 +304,7 @@ class MachRefundPass(unittest.TestCase):
             raise e
         PreconditionWithdrawal.mct_update_super_money_pre(is_change=Constants.RESULT.FALSE)  # 关闭超额提现
 
-    # @unittest.skip('测试')
+    @unittest.skip('测试')
     @ddt.data(*flow_9_4)
     def test_flow_13(self, flow_9_4):
         """
@@ -329,7 +329,7 @@ class MachRefundPass(unittest.TestCase):
         PreconditionWithdrawal.mct_update_super_money_pre(is_change=Constants.RESULT.FALSE)  # 关闭超额提现
         PreconditionWithdrawal.mct_promotion_pre(button=Constants.RESULT.TRUE, all=Constants.RESULT.TRUE)  # 还原准备金数量
 
-    # @unittest.skip('测试')
+    @unittest.skip('测试')
     @ddt.data(*flow_9_5)
     def test_flow_14(self, flow_9_5):
         """缓存中不存在提现记录，在数据库中存在一条orderid为test1的数据，重新请求，金额相同。 withdraw_status2。提现完成订单返回 分为status为成功"""
@@ -360,7 +360,7 @@ class MachRefundPass(unittest.TestCase):
             raise e
         PreconditionWithdrawal.update_pay_url(pay_type='default')  # 回复默认url地址
 
-    # @unittest.skip('测试')
+    @unittest.skip('测试')
     @ddt.data(*flow_9_6)
     def test_flow_15(self, flow_9_6):
         """缓存中不存在提现记录，在数据库中存在一条orderid为test1的数据，重新请求，金额相同。 withdraw_status2。提现完成订单返回 分为status为失败"""
@@ -392,7 +392,7 @@ class MachRefundPass(unittest.TestCase):
             raise e
         PreconditionWithdrawal.update_pay_url(pay_type='default')  # 回复默认url地址
 
-    # @unittest.skip('测试')
+    @unittest.skip('测试')
     @ddt.data(*flow_9_7)
     def test_flow_16(self, flow_9_7):
         """缓存中不存在提现记录，在数据库中存在一条orderid为test1的数据，
@@ -429,7 +429,7 @@ class MachRefundPass(unittest.TestCase):
         PreconditionWithdrawal.mch_update_fixed_poundage(button=Constants.RESULT.FALSE)  # 关闭提现手续费
         PreconditionWithdrawal.update_pay_url(pay_type='default')  # 回复默认url地址
 
-    # @unittest.skip('测试')
+    @unittest.skip('测试')
     @ddt.data(*flow_9_8)
     def test_flow_17(self, flow_9_8):
         """缓存中不存在提现记录，在数据库中存在一条orderid为test1的数据，
@@ -470,7 +470,7 @@ class MachRefundPass(unittest.TestCase):
         PreconditionWithdrawal.mct_update_super_money_pre(is_change=Constants.RESULT.TRUE)  # 关闭超额提现
         PreconditionWithdrawal.update_pay_url(pay_type='default')  # 回复默认url地址
 
-    # @unittest.skip('测试')
+    @unittest.skip('测试')
     @ddt.data(*flow_9_9)
     def test_flow_18(self, flow_9_9):
         """超时时数据回滚流程测试"""

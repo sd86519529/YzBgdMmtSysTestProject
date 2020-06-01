@@ -283,6 +283,7 @@ class MachRefundTimer(unittest.TestCase):
             raise e
         PreconditionWithdrawal.update_pay_url(pay_type='default')  # 回复默认url地址
 
+    # @unittest.skip('测试')
     @ddt.data(*flow_17)
     def test_flow_9_6(self, flow_17):
         """创造一条withdraw_status为0，status=3，number=5 的测试数据，调用定时器，模拟提现接口超时 预期withdraw_status为3  status=2  number=0"""

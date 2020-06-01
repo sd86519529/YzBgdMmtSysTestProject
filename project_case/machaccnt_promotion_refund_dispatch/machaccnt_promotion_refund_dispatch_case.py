@@ -26,7 +26,7 @@ class MachPromotionRefundDispatch(unittest.TestCase):
     def setUp(self):
         log.info('******************************** -- 测试开始 -- ********************************************')
         PreconditionKeepingAccounts.mct_promotion_remain_amt_pre(Constants.RESULT.FALSE)
-        PreconditionKeepingAccounts.mct_promotion_refund_pre()  # 准备活动记账数据
+        PreconditionKeepingAccounts.mct_promotion_refund_pre(Constants.PRE_DATA.PRO_REFUND_DATA)  # 准备活动记账数据
 
     @ddt.data(*flow_not_change_Promotion)
     def test_flow_promotion(self, flow_not_change_Promotion):

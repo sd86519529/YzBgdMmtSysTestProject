@@ -93,5 +93,6 @@ def data_util(data, html, msg):
 
 
 if __name__ == '__main__':
-    while True:
-        send_bug_to_cd(severity='4', module='1', title='测试标题', pri='2', steps="""测试内容""")
+    # while True:
+    #     send_bug_to_cd(severity='4', module='1', title='测试标题', pri='2', steps="""测试内容""")
+    pass

@@ -12,6 +12,8 @@ from data_structure.handle import Handle
 log = Logger('MachPayDispatch').get_log()
 
 exa_and_approve_list = ReadExl(Constants.EXL.PAY, sheet=0).obtain_data()
+unusual_parameter3 = ReadExl.screen_case('支付分账异常调用测试用例3', exa_and_approve_list)  # 异常参数校验数据
+unusual_parameter2 = ReadExl.screen_case('支付分账异常调用测试用例2', exa_and_approve_list)  # 异常参数校验数据
 unusual_parameter = ReadExl.screen_case('支付分账异常调用测试用例', exa_and_approve_list)  # 异常参数校验数据
 
 
@@ -39,6 +41,35 @@ class MachPayUnusual(unittest.TestCase):
         log.info('本次请求结果为%s' % html)
         excepted = json.loads(self.after_treatment_data['excepted_code'])
         Handle.machaccnt_pay_dispatch_assert(self, html, excepted, part=True)
+
+    # @unittest.skip('测试')
+    @ddt.data(*unusual_parameter2)
+    def test_unusual_parameter2(self, unusual_parameter):
+        # 提前准备一条数据
+        PreconditionKeepingAccounts.mct_promotion_refund_pre(Constants.PRE_DATA.PAY_DATA)
+        self.after_treatment_data = Handle.machaccnt_pay_dispatch_handle(unusual_parameter)
+        log.info('参数化处理后的测试数据为:--%s' % self.after_treatment_data)
+        res, html = RequestBase.send_request(**self.after_treatment_data)  # 发送请求
+        log.info('本次请求结果为%s' % html)
+        excepted = json.loads(self.after_treatment_data['excepted_code'])
+        Handle.machaccnt_pay_dispatch_assert(self, html, excepted, part=True)
+
+    # @unittest.skip('测试')
+    @ddt.data(*unusual_parameter3)
+    def test_unusual_parameter3(self, unusual_parameter):
+        # 提前准备一条数据
+        PreconditionKeepingAccounts.mct_promotion_refund_pre(Constants.PRE_DATA.PAY_DATA)
+        self.after_treatment_data = Handle.machaccnt_pay_dispatch_handle(unusual_parameter)
+        log.info('参数化处理后的测试数据为:--%s' % self.after_treatment_data)
+        res, html = RequestBase.send_request(**self.after_treatment_data)  # 发送请求
+        log.info('本次请求结果为%s' % html)
+        excepted = json.loads(self.after_treatment_data['excepted_code'])
+        try:
+            Handle.machaccnt_pay_dispatch_assert(self, html, excepted, part=True)
+        except Exception as e:
+            ClearingKeepingAccounts.err_data_clear(self.after_treatment_data, trans_no='MH20181229115220NBUu')
+            raise e
+        ClearingKeepingAccounts.err_data_clear(self.after_treatment_data, trans_no='MH20181229115220NBUu')
 
     def tearDown(self):
         ClearingKeepingAccounts.err_data_clear(self.after_treatment_data)

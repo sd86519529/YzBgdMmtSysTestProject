@@ -81,12 +81,12 @@ class PreconditionKeepingAccounts(object):
         SqlSave.update_remain_amt(button)
 
     @staticmethod
-    def mct_promotion_refund_pre():
+    def mct_promotion_refund_pre(data):
         """
         活动退款记账时需要提前准备一条活动记账的准备数据
         :return:
         """
-        RequestBase.send_request(**Constants.PRE_DATA.PRO_REFUND_DATA)
+        RequestBase.send_request(**data)
 
     @staticmethod
     def mct_promotion_set_channel(channel):

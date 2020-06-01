@@ -59,6 +59,7 @@ class PreconditionDowStatement(object):
 
     @staticmethod
     def statement_analyze_send(day):
+        """结息对账单"""
         url = 'http://172.16.202.160:3054/handMovement/resolvingBills.htm?billDate=%s' % day
         re = requests.get(url=url)
         print(re.text)
@@ -83,4 +84,8 @@ class PreconditionDowStatement(object):
 
 
 if __name__ == '__main__':
-    PreconditionDowStatement.send_request()
+    # yesterday = str(datetime.date.today() - datetime.timedelta(days=1)).replace('-', '')
+    PreconditionDowStatement.statement_analyze_send('20200521')
+    # url = 'http://172.16.202.160:3064/handMovement/getDownLoad.htm?billDate=%s' % '20200521'
+    # re = requests.get(url=url)
+    # print(re.text)

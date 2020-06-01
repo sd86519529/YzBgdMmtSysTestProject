@@ -17,7 +17,7 @@ class ClearingWithdrawal(object):
         order_no = data['data']['biz_content']['order_no']
         table_name = [Constants.TableName.WITH_DRAW_INFO, Constants.TableName.HIS_ACCNT_PROFILE,
                       Constants.TableName.HIS_ACCNT_MCH_SUB, Constants.TableName.HIS_SETTLED_AMOUNT,
-                      Constants.TableName.HIS_ACCNT_PREPAY]
+                      Constants.TableName.HIS_ACCNT_PREPAY,Constants.TableName.MCH_CHARGE_UP]
         for tb in table_name:
             SqlSave.delete_withdrawal_info(table_name=tb, order_no=order_no)
 

@@ -6,6 +6,7 @@ EXCLE:
   MCHACCNT_PROMOTION_DISPATCH: machaccnt_pay_dispatch,活动记账接口测试用例.xlsx
   MCHACCNT_PROMOTION_REFUND_DISPATCH: machaccnt_pay_dispatch,活动退款记账接口测试用例.xlsx
   MCHACCNT_WITHDRAW: machaccnt_withdraw,提现接口测试用例.xlsx
+  MCHACCNT_RESOLIVINGBILL: resolvingbill,对账.xlsx
 # 接口请求时商户号对应的MD5TOKEN加密
 MD5TOKEN:
   JI0: 9b389216c3c55a7c535510b33b9e6ec6
@@ -17,6 +18,7 @@ HOST:
   TEST: http://172.16.202.163:3054/api/deposit.htm
   #  BASE: http://172.16.202.165:3054/api/deposit.htm
   TIMER_TEST: http://172.16.202.160:3054/api/testDealWithdraw.htm
+  TIMER_WITH: http://172.16.202.160:3054/api/timingPrePay
 
 MERCHANT:
   MCHNO: MH20181229115220NBUu

@@ -6,9 +6,21 @@ class Constants(object):
         big_zfb_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\resolvingbill\zfb_20200426_vuQs6pRk5GFhOfo6Lpzz.csv'  # 过大的对账单(zfb)
         none_zfb_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\resolvingbill\zfb_20200417_6RygDDfSs87Ff7l0Q4xt.csv'  # 空csv文件
         zfb_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\resolvingbill\zfb_20200422_iyUiAEjyWnw4031iDwmp.csv'  # 正常的支付宝对账单文件
+        zfb2_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\resolvingbill\zfb_20200422_iyUiAEjyWnw4031iDwml.csv'  # 正常的支付宝对账单文件2
+        cib_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\resolvingbill\cib_20200427_7EGLKChvMMQh1tRy3egg.csv'  # 正常的cib对账单文件
+        dlb_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\resolvingbill\dlb_20200427_3v8u4AtdJFYp1BoPRZdg.csv'  # 正常的cib对账单文件
+        qq_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\resolvingbill\qq_20200427_gez41EKSpWo4zecIhnKf.csv'  # 正常的cib对账单文件
+        wx_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\resolvingbill\wx_20200427_DVqfMez6kyIiHHoopdkh.csv'  # 正常的cib对账单文件
+        yl_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\resolvingbill\yl_20200427_f7Og5pzCK3DDZ73hFaUa.csv'  # 正常的cib对账单文件
 
     class CHANNEL:
         zfb = '2017112800223321'
+        zfb2 = '2017112800223322'
+        cib = '86570015'
+        dlb = '10001115631585874067678'
+        qq = '1298241301'
+        wx = '1520262791'
+        yl = '46570003'
 
     class MockUrl:
         SUCCESS = 'http://172.16.202.160:10008/s'
@@ -51,6 +63,7 @@ class Constants(object):
     class HOST:
         TEST = 'HOST.TEST'  # 测试环境
         TIMER_TEST = 'HOST.TIMER_TEST'  # 提现定时器触发
+        TIMER_WITH = 'HOST.TIMER_WITH'  # 还准备金定时器触发
 
     class EXL:
         PAY = 'MCHACCNT_PAY_DISPATCH'  # 记账用例储存管理
@@ -58,6 +71,7 @@ class Constants(object):
         PROMOTION = 'MCHACCNT_PROMOTION_DISPATCH'  # 活动记账用例储存管理
         PROMOTION_REFUND = 'MCHACCNT_PROMOTION_REFUND_DISPATCH'  # 活动退款记账用例储存管理
         WITHDRAW = 'MCHACCNT_WITHDRAW'  # 提现用例储存管理
+        RESOLIVINGBILL = 'MCHACCNT_RESOLIVINGBILL'
 
     class TableName:
         HIS_ACCNT_MCH_SUB = 'his_accnt_mch_sub'  # 子商户表
@@ -67,6 +81,7 @@ class Constants(object):
         WITH_DRAW_INFO = 'with_draw_info'  # 提现明细表
         HIS_SETTLED_AMOUNT = 'his_settled_amount'  # 结算金额明细记录表
         BANK_CARD = 'bank_card'  # 商户银行卡信息表
+        MCH_CHARGE_UP = 'mch_accnt_charge_up'  # 提现还准备金记录表
 
     class RESULT:
         TRUE = True
@@ -88,3 +103,14 @@ class Constants(object):
                                "biz_type": "mchaccnt.promotion.pay.dispatch",
                                "out_trans_no": "225295c2068ae5405cada7edf1670749a6", "sign_type": "MD5",
                                "timestamp": "20191028022240", "mch_no": "MH20181229115220NBUu"}}
+        PAY_DATA = {"请求类型": '',
+                    "data": {
+                        "biz_content": {"trans_no": "MH20181229115220NBUu", "trans_time": "2020-05-20 17:25:58",
+                                        'trans_channel': '20251', 'settle_type': '1', 'trans_amt': '1',
+                                        "split_accnt_detail": [
+                                            {"order_no": "test10", "amount": 1, "dispatch_event": "pay",
+                                             'dispatch_type': '1', "mch_accnt_no": "T0020181229184441000000",
+                                             'accnt_amt_before': 1}]},
+                        "biz_type": "mchaccnt.pay.dispatch",
+                        "out_trans_no": "225295c2068ae5405cada7edf1670749a6", "sign_type": "MD5",
+                        "timestamp": "20191028022240", "mch_no": "MH20181229115220NBUu"}}

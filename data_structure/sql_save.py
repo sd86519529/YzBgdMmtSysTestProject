@@ -45,7 +45,7 @@ class SqlSave(object):
         :param trans_no:
         :return:
         """
-        sql = "delete from %s where trans_no = '%s'" % (table_name, trans_no)
+        sql = "delete from %s where trans_no = '%s' and mch_no='MH20181229115220NBUu'" % (table_name, trans_no)
         ConnectionMysql().execute_db(sql)
 
     @staticmethod
@@ -346,5 +346,5 @@ class SqlSave(object):
 
 
 if __name__ == '__main__':
-    a = SqlSave.insert_download_info('2017112800223321', 'zfb_20200417_6RygDDfSs87Ff7l0Q4xt.csv', '20200426', 'zfb')
+    a = SqlSave.insert_download_info('2017112800223321', 'zfb_20200519_6RygDDfSs87Ff7l0Q4xx.csv', '20200426', 'zfb')
     print(a)

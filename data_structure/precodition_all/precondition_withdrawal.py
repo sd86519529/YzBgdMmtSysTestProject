@@ -148,6 +148,12 @@ class PreconditionWithdrawal(object):
     #     info = SqlSave.select_fix_poundage()
     #     return info[0][0]
 
+    @staticmethod
+    def send_with():
+        """触发还准备金定时器"""
+        res = requests.post(url=ConfigManager.get_service(Constants.HOST.TIMER_WITH))
+        print(res)
 
 if __name__ == '__main__':
     PreconditionWithdrawal.send_deal_withdraw()
+    # PreconditionWithdrawal.send_with()

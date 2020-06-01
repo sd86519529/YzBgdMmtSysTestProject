@@ -32,12 +32,15 @@ class ClearingKeepingAccounts(object):
             SqlSave.delete_mch_accnt_balance_record(oder_id=oder_id)
 
     @staticmethod
-    def err_data_clear(exe_data):
+    def err_data_clear(exe_data, trans_no=True):
         """特殊清理方法"""
-        trans_no = Base.get_trans_no(exe_data)
+        if trans_no is True:
+            trans_no = Base.get_trans_no(exe_data)
+        else:
+            trans_no = trans_no
         table_name = [Constants.TableName.HIS_ACCNT_PREPAY, Constants.TableName.HIS_ACCNT_ONWAY,
                       Constants.TableName.HIS_ACCNT_PROFILE, Constants.TableName.HIS_ACCNT_MCH_SUB]
-        oder_id = ['test1', 'test2', 'test3', 'test4', 'test5', 'test6']
+        oder_id = ['test1', 'test2', 'test3', 'test4', 'test5', 'test6', 'test10']
         for table_name in table_name:
             SqlSave.delete_amt_info(table_name=table_name, trans_no=trans_no)
         for id in oder_id:
