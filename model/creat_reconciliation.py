@@ -69,6 +69,7 @@ class CreatReconciliation(object):
         data['data']['biz_content']['trans_amt'] = args[1]  # '300'
         data['data']['biz_content']['split_accnt_detail'][0]['order_no'] = args[2]  # 'test01'
         data['data']['biz_content']['split_accnt_detail'][0]['amount'] = args[3]  # '300'
+        # todo:暂时支持两个pay或者两个refund，可以通过除法生成多个
         if len(args) != 5:
             data['data']['biz_content']['split_accnt_detail'].append(
                 {"order_no": "test10", "amount": 1, "dispatch_event": "pay",
