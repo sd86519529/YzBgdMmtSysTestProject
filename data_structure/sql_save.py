@@ -344,6 +344,41 @@ class SqlSave(object):
         sql = "update download_info set into_data = '1' where id = '99999'"
         ConnectionMysql().execute_db(sql)
 
+    @staticmethod
+    def delete_reconciliation_result():
+        sql = "delete from reconciliation_result where mchNo='%s' and beginTime='%s'" % (
+            Constants.Merchant.CS, '2020-05-19')
+        ConnectionMysql().execute_db(sql)
+
+    @staticmethod
+    def delete_reconciliation_result_info():
+        sql = "delete from reconciliation_result_info where transNo like 'jinweiceshi%'"
+        ConnectionMysql().execute_db(sql)
+
+    @staticmethod
+    def delete_pay_refund():
+        sql_1 = "delete from his_accnt_mch_sub where trans_no like 'jinweiceshi%'"
+        sql_2 = "delete from his_accnt_onway where trans_no like 'jinweiceshi%'"
+        sql_3 = "delete from his_accnt_profile where trans_no like 'jinweiceshi%'"
+        sql_4 = "delete from mch_accnt_balance_record where id_mch_balance_record like 'test%'"
+        ConnectionMysql().execute_db(sql_1)
+        ConnectionMysql().execute_db(sql_2)
+        ConnectionMysql().execute_db(sql_3)
+        ConnectionMysql().execute_db(sql_4)
+
+    @staticmethod
+    def select_reconciliation_result():
+        sql = "select trans_fee,recon_amt,account_type from reconciliation_result where mchNo='MH20181229115220NBUu' and beginTime='2020-05-19'"
+        result = ConnectionMysql().select_db(sql)
+        return result[0]
+
+    @staticmethod
+    def select_reconciliation_result_info():
+        """查询问题件明细"""
+        sql = "select type from reconciliation_result_info where transNo like 'jinweiceshi%'"
+        result = ConnectionMysql().select_db(sql)
+        return result
+
 
 if __name__ == '__main__':
     a = SqlSave.insert_download_info('2017112800223321', 'zfb_20200519_6RygDDfSs87Ff7l0Q4xx.csv', '20200426', 'zfb')

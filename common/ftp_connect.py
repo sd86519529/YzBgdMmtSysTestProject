@@ -9,11 +9,13 @@ class FtpConnect(object):
         self.username = obj.get('ftp_config', 'username')
         self.password = obj.get('ftp_config', 'password')
         self.host = obj.get('ftp_config', 'server_host')
+        print(self.username,self.password,self.host)
         self.f = self.__connect_ftp()
 
     def __connect_ftp(self):
         f = ftplib.FTP(host=self.host)
         f.login(self.username, self.password)
+        #/var/ftp/test
         f.cwd('deposit_test')
         return f
 
@@ -41,4 +43,4 @@ class FtpConnect(object):
 if __name__ == '__main__':
     # a = FtpConnect().push_file_csv_on_ftp()
     # print(a)
-    FtpConnect().delete_file('zfb_20200426_vuQs6pRk5GFhOfo6Lpzz.csv')
+    FtpConnect()

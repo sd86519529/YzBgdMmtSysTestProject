@@ -129,8 +129,7 @@ class PreconditionWithdrawal(object):
     @staticmethod
     def send_deal_withdraw():
         """触发提现"""
-        res = requests.post(url=ConfigManager.get_service(Constants.HOST.TIMER_TEST))
-        print(res)
+        requests.post(url=ConfigManager.get_service(Constants.HOST.TIMER_TEST))
 
     @staticmethod
     def with_draw_info():
@@ -142,17 +141,11 @@ class PreconditionWithdrawal(object):
     def update_pay_url(pay_type):
         """更新提现真实请求的接口，模拟返回"""
         SqlSave.update_pay_url(pay_type)
-    # @staticmethod
-    # def select_fix_poundage():
-    #     """获取提现手续费"""
-    #     info = SqlSave.select_fix_poundage()
-    #     return info[0][0]
 
     @staticmethod
     def send_with():
         """触发还准备金定时器"""
-        res = requests.post(url=ConfigManager.get_service(Constants.HOST.TIMER_WITH))
-        print(res)
+        requests.post(url=ConfigManager.get_service(Constants.HOST.TIMER_WITH))
 
 if __name__ == '__main__':
     PreconditionWithdrawal.send_deal_withdraw()

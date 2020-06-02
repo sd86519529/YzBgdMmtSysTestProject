@@ -27,6 +27,7 @@ class MachPayDispatch(unittest.TestCase):
     def setUpClass(cls):
         """关闭子商户承担手续费"""
         # PreconditionKeepingAccounts.mct_pay_channel_rate_pre(is_change=Constants.CHARGE.FALSE)
+        # PreconditionKeepingAccounts.mct_pay_channel_rate_pre(is_change=Constants.CHARGE.FALSE)
 
     def setUp(self):
         log.info('******************************** -- 测试开始 -- ********************************************')

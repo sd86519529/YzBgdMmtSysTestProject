@@ -1,5 +1,6 @@
 from data_structure.handle_all.handle_keeping_accounts import HandleKeepingAccounts
 from data_structure.handle_all.handle_withdrawal import HandleWithdrawal
+from data_structure.handle_all.handle_reconciliation import HandleReconciliation
 from common.constants import Constants
 from common.config_manager import ConfigManager
 
@@ -75,3 +76,8 @@ class Handle(object):
     def machaccnt_timer_assert(self, html, excepted, befor_tuple=None, after_tuple=None, part=Constants.RESULT.FALSE):
         # 提现定时器断言
         HandleWithdrawal.timer_withdraw_assert(self, html, excepted, befor_tuple, after_tuple, part, Handle.put)
+
+    @staticmethod
+    def machaccnt_handle_assert(self, expect, actual):
+        # 对账断言
+        HandleReconciliation.handle_assert(self, expect, actual)

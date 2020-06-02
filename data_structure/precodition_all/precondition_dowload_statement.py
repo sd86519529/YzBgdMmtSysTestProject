@@ -58,8 +58,8 @@ class PreconditionDowStatement(object):
         return result
 
     @staticmethod
-    def statement_analyze_send(day):
-        """结息对账单"""
+    def statement_analyze_send(day='20200519'):
+        """解析对账单"""
         url = 'http://172.16.202.160:3054/handMovement/resolvingBills.htm?billDate=%s' % day
         re = requests.get(url=url)
         print(re.text)
@@ -81,6 +81,12 @@ class PreconditionDowStatement(object):
     def update_into_data():
         """更新对账单解析标识为已解析"""
         SqlSave.update_into_data()
+
+    @staticmethod
+    def recondition():
+        """发起对账"""
+        url = 'http://172.16.202.160:3054/handMovement/recondition.htm?billDate=20200519'
+        requests.get(url=url)
 
 
 if __name__ == '__main__':

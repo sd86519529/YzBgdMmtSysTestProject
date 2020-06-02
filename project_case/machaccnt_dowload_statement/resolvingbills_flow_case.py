@@ -11,8 +11,9 @@ zfb_path = [
     (Constants.STATEMENT.dlb_path, 'dlb', Constants.CHANNEL.dlb),
     (Constants.STATEMENT.qq_path, 'qq', Constants.CHANNEL.qq),
     (Constants.STATEMENT.wx_path, 'wx', Constants.CHANNEL.wx),
-    (Constants.STATEMENT.yl_path, 'yl', Constants.CHANNEL.yl)]
-# (Constants.STATEMENT.cib_path, 'cib', Constants.CHANNEL.cib),
+    (Constants.STATEMENT.yl_path, 'yl', Constants.CHANNEL.yl),
+    (Constants.STATEMENT.cib_path, 'cib', Constants.CHANNEL.cib)]
+# ,
 log = Logger('ResolvingBillFlow').get_log()
 
 
