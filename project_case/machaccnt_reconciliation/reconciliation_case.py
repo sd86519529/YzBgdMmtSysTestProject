@@ -51,7 +51,7 @@ class Reconciliation(unittest.TestCase):
         PreconditionDowStatement.statement_analyze_send()
         PreconditionDowStatement.recondition()
 
-    # @unittest.skip('测试')
+    @unittest.skip('测试')
     def test_cib_reconciliation_false(self):
         """cib对不平测试用例"""
         CreatReconciliation().cib_in_transit_data()  # 制造记账退款在途数据
@@ -61,6 +61,51 @@ class Reconciliation(unittest.TestCase):
         PreconditionDowStatement.statement_analyze_send()
         PreconditionDowStatement.recondition()
         expect = CreatReconciliation.info_assert_kwargs(trans_fee='280', recon_amt=85820, account_type='N',
+                                                        info_len=10,
+                                                        info_list=['2', '0', '0', '2', '1', '1', '1', '1', '1', '1'])
+        actual = PreconditionReconciliation.info_assert_kwargs_actual()
+        Handle.machaccnt_handle_assert(self, expect, actual)
+
+    @unittest.skip('测试')
+    def test_dlb_reconciliation_false(self):
+        """dlb对不平测试用例"""
+        CreatReconciliation().dlb_in_transit_data()  # 制造记账退款在途数据
+        zfb_path = Constants.RECONCILIATION.false_dlb_path  # 获取对账单数据
+        path_name = FtpConnect().push_file_csv_on_ftp(zfb_path)
+        PreconditionDowStatement.creat_download_info(Constants.CHANNEL.dlb, path_name, '20200519', 'dlb')
+        PreconditionDowStatement.statement_analyze_send()
+        PreconditionDowStatement.recondition()
+        expect = CreatReconciliation.info_assert_kwargs(trans_fee='280', recon_amt=85820, account_type='N',
+                                                        info_len=10,
+                                                        info_list=['2', '0', '0', '2', '1', '1', '1', '1', '1', '1'])
+        actual = PreconditionReconciliation.info_assert_kwargs_actual()
+        Handle.machaccnt_handle_assert(self, expect, actual)
+
+    @unittest.skip('测试')
+    def test_yl_reconciliation_false(self):
+        """yl对不平测试用例"""
+        CreatReconciliation().yl_in_transit_data()  # 制造记账退款在途数据
+        zfb_path = Constants.RECONCILIATION.false_yl_path  # 获取对账单数据
+        path_name = FtpConnect().push_file_csv_on_ftp(zfb_path)
+        PreconditionDowStatement.creat_download_info(Constants.CHANNEL.yl, path_name, '20200519', 'yl')
+        PreconditionDowStatement.statement_analyze_send()
+        PreconditionDowStatement.recondition()
+        expect = CreatReconciliation.info_assert_kwargs(trans_fee='280', recon_amt=85820, account_type='N',
+                                                        info_len=10,
+                                                        info_list=['2', '0', '0', '2', '1', '1', '1', '1', '1', '1'])
+        actual = PreconditionReconciliation.info_assert_kwargs_actual()
+        Handle.machaccnt_handle_assert(self, expect, actual)
+
+    # @unittest.skip('测试')
+    def test_qq_reconciliation_false(self):
+        """qq对不平测试用例"""
+        CreatReconciliation().qq_in_transit_data()  # 制造记账退款在途数据
+        zfb_path = Constants.RECONCILIATION.false_qq_path  # 获取对账单数据
+        path_name = FtpConnect().push_file_csv_on_ftp(zfb_path)
+        PreconditionDowStatement.creat_download_info(Constants.CHANNEL.qq, path_name, '20200519', 'qq')
+        PreconditionDowStatement.statement_analyze_send()
+        PreconditionDowStatement.recondition()
+        expect = CreatReconciliation.info_assert_kwargs(trans_fee='174', recon_amt=85926, account_type='N',
                                                         info_len=10,
                                                         info_list=['2', '0', '0', '2', '1', '1', '1', '1', '1', '1'])
         actual = PreconditionReconciliation.info_assert_kwargs_actual()

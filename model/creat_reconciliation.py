@@ -16,6 +16,27 @@ class CreatReconciliation(object):
         """
         self.__init_data(button='cib')
 
+    def dlb_in_transit_data(self):
+        """
+        cib制造在途数据的方法 对不平
+        """
+        self.__init_data(button='dlb')
+
+    def yl_in_transit_data(self):
+        """
+        yl制造在途数据方法 对不平
+        :return:
+        """
+        self.__init_data(button='yl')
+
+    def qq_in_transit_data(self):
+        """
+        yl制造在途数据方法 对不平
+        :return:
+        """
+        self.__init_data(button='qq')
+
+
     def zfb_in_transit_true_data(self):
         """
         支付宝对平数据产生
@@ -57,6 +78,12 @@ class CreatReconciliation(object):
         data = self.zfb_pay_data(data_list)
         RequestBase.send_request(**data)
 
+    def __u_t(self, lis, key):
+        for d in lis:
+            for x in range(len(d)):
+                if d[x] == '20251':
+                    d[x] = key
+
     def __init_data(self, button):
         """支付记账,退款data"""
         if button == 'zfb':
@@ -65,14 +92,23 @@ class CreatReconciliation(object):
         elif button == 'cib':
             data_list = Constants.CREATE.zfb_pay
             data_refund_list = Constants.CREATE.zfb_refund
-            for d in data_list:
-                for x in range(len(d)):
-                    if d[x] == '20251':
-                        d[x] = '20692'
-            for d in data_refund_list:
-                for x in range(len(d)):
-                    if d[x] == '20251':
-                        d[x] = '20692'
+            self.__u_t(data_list, key='20692')
+            self.__u_t(data_refund_list, key='20692')
+        elif button == 'dlb':
+            data_list = Constants.CREATE.zfb_pay
+            data_refund_list = Constants.CREATE.zfb_refund
+            self.__u_t(data_list, key='2091')
+            self.__u_t(data_refund_list, key='2091')
+        elif button == 'yl':
+            data_list = Constants.CREATE.zfb_pay
+            data_refund_list = Constants.CREATE.zfb_refund
+            self.__u_t(data_list, key='2056')
+            self.__u_t(data_refund_list, key='2056')
+        elif button == 'qq':
+            data_list = Constants.CREATE.zfb_pay
+            data_refund_list = Constants.CREATE.zfb_refund
+            self.__u_t(data_list, key='20061')
+            self.__u_t(data_refund_list, key='20061')
         else:
             data_list = ''
             data_refund_list = ''

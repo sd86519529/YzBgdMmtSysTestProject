@@ -18,6 +18,9 @@ class Constants(object):
         false_zfb_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\reconciliation\zfb_20200519_6RygDDfSs87Ff7l0Q4xx.csv'  # 出现问题件的对账单
         true_zfb_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\reconciliation\zfb_20200519_6RygDDfSs87Ff7l0Q4true.csv'  # 支付宝对平的对账单
         false_cib_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\reconciliation\cib_20200427_7EGLKChvMMQh1tRy3exx.csv'
+        false_dlb_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\reconciliation\dlb_20200427_3v8u4AtdJFYp1BoPRZdg.csv'
+        false_yl_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\reconciliation\yl_20200427_f7Og5pzCK3DDZ73hFaUa.csv'
+        false_qq_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\reconciliation\qq_20200427_gez41EKSpWo4zecIhnKf.csv'
 
     class CREATE:
         """制造对账数据生成列表"""
