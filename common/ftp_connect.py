@@ -15,7 +15,7 @@ class FtpConnect(object):
     def __connect_ftp(self):
         f = ftplib.FTP(host=self.host)
         f.login(self.username, self.password)
-        #/var/ftp/test
+        # /var/ftp/test
         f.cwd('deposit_test')
         return f
 

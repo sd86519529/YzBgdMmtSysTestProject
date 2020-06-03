@@ -23,9 +23,10 @@ class Reconciliation(unittest.TestCase):
         pass
 
     def tearDown(self):
-        ClearingReconciliation.clearing_all()
+        # ClearingReconciliation.clearing_all()
+        pass
 
-
+    @unittest.skip('测试')
     def test_zfb_reconciliation_false(self):
         """支付宝，对不平测试用例集合"""
         CreatReconciliation().zfb_in_transit_data()  # 制造记账退款在途数据
@@ -34,9 +35,9 @@ class Reconciliation(unittest.TestCase):
         PreconditionDowStatement.creat_download_info(Constants.CHANNEL.zfb, path_name, '20200519', 'zfb')
         PreconditionDowStatement.statement_analyze_send()
         PreconditionDowStatement.recondition()
-        expect = CreatReconciliation.info_assert_kwargs(trans_fee='283', recon_amt=86367, account_type='N',
-                                                        info_len=8,
-                                                        info_list=['2', '0', '0', '1', '1', '1', '1', '1'])
+        expect = CreatReconciliation.info_assert_kwargs(trans_fee='280', recon_amt=85820, account_type='N',
+                                                        info_len=10,
+                                                        info_list=['2', '0', '0', '2', '1', '1', '1', '1', '1', '1'])
         actual = PreconditionReconciliation.info_assert_kwargs_actual()
         Handle.machaccnt_handle_assert(self, expect, actual)
 
@@ -49,6 +50,21 @@ class Reconciliation(unittest.TestCase):
         PreconditionDowStatement.creat_download_info(Constants.CHANNEL.zfb, path_name, '20200519', 'zfb')
         PreconditionDowStatement.statement_analyze_send()
         PreconditionDowStatement.recondition()
+
+    # @unittest.skip('测试')
+    def test_cib_reconciliation_false(self):
+        """cib对不平测试用例"""
+        CreatReconciliation().cib_in_transit_data()  # 制造记账退款在途数据
+        zfb_path = Constants.RECONCILIATION.false_cib_path  # 获取对账单数据
+        path_name = FtpConnect().push_file_csv_on_ftp(zfb_path)
+        PreconditionDowStatement.creat_download_info(Constants.CHANNEL.cib, path_name, '20200519', 'cib')
+        PreconditionDowStatement.statement_analyze_send()
+        PreconditionDowStatement.recondition()
+        expect = CreatReconciliation.info_assert_kwargs(trans_fee='280', recon_amt=85820, account_type='N',
+                                                        info_len=10,
+                                                        info_list=['2', '0', '0', '2', '1', '1', '1', '1', '1', '1'])
+        actual = PreconditionReconciliation.info_assert_kwargs_actual()
+        Handle.machaccnt_handle_assert(self, expect, actual)
 
 
 if __name__ == '__main__':

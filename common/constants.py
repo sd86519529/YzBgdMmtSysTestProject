@@ -17,22 +17,27 @@ class Constants(object):
         """对账需要的对账单"""
         false_zfb_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\reconciliation\zfb_20200519_6RygDDfSs87Ff7l0Q4xx.csv'  # 出现问题件的对账单
         true_zfb_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\reconciliation\zfb_20200519_6RygDDfSs87Ff7l0Q4true.csv'  # 支付宝对平的对账单
+        false_cib_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\reconciliation\cib_20200427_7EGLKChvMMQh1tRy3exx.csv'
 
     class CREATE:
         """制造对账数据生成列表"""
         # 问题列表生成
-        creat_pay_list = [['jinweiceshi_zfb_002', '300', 'test01', '300', '2020-05-19 11:33:44'],
-                          ['jinweiceshi_zfb_003', '28000', 'test02', '28000', '2020-05-19 11:33:44'],
-                          ['jinweiceshi_zfb_004', '320', 'test03', '320', '2020-05-19 11:33:44'],
-                          ['jinweiceshi_zfb_005', '30000', 'test04', '30000', '2020-05-19 11:33:44'],
-                          ['jinweiceshi_zfb_009', '300', 'test09', '300', '2020-05-20 11:33:44'],
-                          ['jinweiceshi_zfb_010', '300', 'test10', '270', '2020-05-19 11:33:44', 'test14', '30']]
+        zfb_pay = [['jinweiceshi_zfb_002', '300', 'test01', '300', '2020-05-19 11:33:44', '20251'],
+                   ['jinweiceshi_zfb_003', '28000', 'test02', '28000', '2020-05-19 11:33:44', '20251'],
+                   ['jinweiceshi_zfb_004', '320', 'test03', '320', '2020-05-19 11:33:44', '20251'],
+                   ['jinweiceshi_zfb_005', '30000', 'test04', '30000', '2020-05-19 11:33:44', '20251'],
+                   ['jinweiceshi_zfb_009', '300', 'test09', '300', '2020-05-20 11:33:44', '20251'],
+                   ['jinweiceshi_zfb_015', '300', 'test15', '300', '2020-05-19 11:33:44', '29999'],
+                   ['jinweiceshi_zfb_010', '300', 'test10', '270', '2020-05-19 11:33:44', '20251', 'test14',
+                    '30']]
 
-        creat_refund_list = [['jinweiceshi_zfb_007', '850', 'test07', '850', '2020-05-19 11:33:44'],
-                             ['jinweiceshi_zfb_008', '650', 'test08', '650', '2020-05-19 11:33:44'],
-                             ['jinweiceshi_zfb_011', '650', 'test11', '650', '2020-05-19 11:33:44'],
-                             ['jinweiceshi_zfb_012', '850', 'test12', '850', '2020-05-20 11:33:44'],
-                             ['jinweiceshi_zfb_013', '850', 'test13', '750', '2020-05-19 11:33:44', 'test15', '100']]
+        zfb_refund = [['jinweiceshi_zfb_007', '850', 'test07', '850', '2020-05-19 11:33:44', '20251'],
+                      ['jinweiceshi_zfb_008', '650', 'test08', '650', '2020-05-19 11:33:44', '20251'],
+                      ['jinweiceshi_zfb_011', '650', 'test11', '650', '2020-05-19 11:33:44', '20251'],
+                      ['jinweiceshi_zfb_012', '850', 'test12', '850', '2020-05-20 11:33:44', '20251'],
+                      ['jinweiceshi_zfb_016', '850', 'test16', '850', '2020-05-19 11:33:44', '29999'],
+                      ['jinweiceshi_zfb_013', '850', 'test13', '750', '2020-05-19 11:33:44', '20251', 'test17',
+                       '100']]
         # 对平列表生成
         creat_pay_true_list = ['jinweiceshi_zfb_001', '300', 'test01', '300', '2020-05-19 11:33:44']
 
