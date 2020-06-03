@@ -172,16 +172,6 @@ class SqlSave(object):
         ConnectionMysql().execute_db(sql_1)
         ConnectionMysql().execute_db(sql_2)
 
-    #
-    # @staticmethod
-    # def mch_update_fixed_poundage(button):
-    #     if button is True:
-    #         sql = "update mch set fixed_poundage = '100' where mch_no = '%s'" % ConfigManager.get_service(
-    #             Constants.Merchant.CS)
-    #     else:
-    #         sql = "update mch set fixed_poundage = null where mch_no = '%s'" % ConfigManager.get_service(
-    #             Constants.Merchant.CS)
-    #     ConnectionMysql().execute_db(sql)
 
     @staticmethod
     def mch_update_fixed_poundage(button, number):
