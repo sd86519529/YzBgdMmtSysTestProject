@@ -25,6 +25,7 @@ class Constants(object):
     class CREATE:
         """制造对账数据生成列表"""
         # 问题列表生成
+        # trans_no trans_amount order_no order_amount trans_time channel
         zfb_pay = [['jinweiceshi_zfb_002', '300', 'test01', '300', '2020-05-19 11:33:44', '20251'],
                    ['jinweiceshi_zfb_003', '28000', 'test02', '28000', '2020-05-19 11:33:44', '20251'],
                    ['jinweiceshi_zfb_004', '320', 'test03', '320', '2020-05-19 11:33:44', '20251'],
@@ -42,7 +43,9 @@ class Constants(object):
                       ['jinweiceshi_zfb_013', '850', 'test13', '750', '2020-05-19 11:33:44', '20251', 'test17',
                        '100']]
         # 对平列表生成
-        creat_pay_true_list = ['jinweiceshi_zfb_001', '300', 'test01', '300', '2020-05-19 11:33:44']
+        creat_pay_true_list = [['jinweiceshi_settle_001', '300', 'test01', '300', '2020-01-01 11:33:44','2051'],
+                               ['jinweiceshi_settle_002', '400', 'test02', '300', '2020-01-01 11:33:44','2051','test03','100'],
+                               ['jinweiceshi_settle_004', '300', 'test04', '300', '2020-01-01 11:33:44', '2051']]
 
     class CHANNEL:
         zfb = '2017112800223321'
@@ -90,6 +93,9 @@ class Constants(object):
         PREPAY = {'prepay_1': 'SUBMERCHANTS.PREPAY_1', 'prepay_2': 'SUBMERCHANTS.PREPAY_2'}  # 准备金账户
 
         DEPOSITORY = 'SUBMERCHANTS.DEPOSITORY'
+
+        ONWAY = 'SUBMERCHANTS.ONWAY'
+
 
     class HOST:
         TEST = 'HOST.TEST'  # 测试环境

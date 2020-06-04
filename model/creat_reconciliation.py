@@ -75,8 +75,9 @@ class CreatReconciliation(object):
 
     def __init_true_data(self):
         data_list = Constants.CREATE.creat_pay_true_list
-        data = self.zfb_pay_data(data_list)
-        RequestBase.send_request(**data)
+        for i in data_list:
+            data = self.zfb_pay_data(i)
+            RequestBase.send_request(**data)
 
     def __u_t(self, lis, key):
         for d in lis:
@@ -121,6 +122,7 @@ class CreatReconciliation(object):
 
     def zfb_pay_data(self, args, refund=False):
         data = CreatReconciliation.get_data()
+        print(args)
         data['data']['biz_content']['trans_channel'] = args[5]
         data['data']['biz_content']['trans_no'] = args[0]  # 'jinweiceshi_zfb_001'
         data['data']['biz_content']['trans_time'] = args[4]
