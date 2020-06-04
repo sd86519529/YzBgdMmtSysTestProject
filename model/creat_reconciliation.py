@@ -110,8 +110,8 @@ class CreatReconciliation(object):
             self.__u_t(data_list, key='20061')
             self.__u_t(data_refund_list, key='20061')
         else:
-            data_list = ''
-            data_refund_list = ''
+            data_list = Constants.CREATE.zfb_pay
+            data_refund_list = Constants.CREATE.zfb_refund
         for i in data_list:
             data = self.zfb_pay_data(i)
             RequestBase.send_request(**data)
