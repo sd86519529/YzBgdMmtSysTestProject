@@ -371,7 +371,7 @@ class SqlSave(object):
     @staticmethod
     def insert_download_info():
         """插入对账单下载记录"""
-        sql = "INSERT INTO `deposit`.`download_info`(`id`, `mch_no`, `channel`, `download_url`, `bill_date`, `create_time`, `update_time`, `type`, `is_his_data`, `into_data`) VALUES (NULL, 'MH20181229115220NBUu', '818181', 'cib_20200101_I9sQIijKfJpX60Vnxzze.csv', '20200101', '2020-01-02 05:00:16', '2020-01-02 05:00:16', 'cib', NULL, '1');"
+        sql = "INSERT INTO `deposit`.`download_info`(`id`, `mch_no`, `channel`, `download_url`, `bill_date`, `create_time`, `update_time`, `type`, `is_his_data`, `into_data`) VALUES (NULL, 'MH20181229115220NBUu', '2017112800223321', 'zfb_20200101_I9sQIijKfJpX60Vnxzze.csv', '20200101', '2020-01-02 05:00:16', '2020-01-02 05:00:16', 'zfb', NULL, '1');"
         result = ConnectionMysql().execute_db(sql)
         return result
 
@@ -384,7 +384,7 @@ class SqlSave(object):
     @staticmethod
     def insert_reconciliation_result():
         """插入对账记录"""
-        sql = "INSERT INTO `deposit`.`reconciliation_result`(`id`, `reconciliation_count`, `bookkeeping_count`, `rdChannel`, `isHisData`, `mchNo`, `remark`, `beginTime`, `endTime`, `createTime`, `trans_fee`, `acc_mch_id`, `diff_amt`, `account_type`, `keep_amt`, `recon_amt`, `seq`, `match_flag`, `profit_loss_amt`) VALUES (NULL, 5, 5, 'cib', NULL, 'MH20181229115220NBUu', NULL, '2020-01-01', '2020-01-01', '2020-01-01 00:00:04', '0', '818181', 0, 'Y', 1000, 980, 1, '2', 20);"
+        sql = "INSERT INTO `deposit`.`reconciliation_result`(`id`, `reconciliation_count`, `bookkeeping_count`, `rdChannel`, `isHisData`, `mchNo`, `remark`, `beginTime`, `endTime`, `createTime`, `trans_fee`, `acc_mch_id`, `diff_amt`, `account_type`, `keep_amt`, `recon_amt`, `seq`, `match_flag`, `profit_loss_amt`) VALUES (NULL, 5, 5, 'zfb', NULL, 'MH20181229115220NBUu', NULL, '2020-01-01', '2020-01-01', '2020-01-01 00:00:04', '0', '2017112800223321', 0, 'Y', 1000, 980, 1, '2', 20);"
         result = ConnectionMysql().execute_db(sql)
         return result
 
@@ -412,6 +412,6 @@ class SqlSave(object):
 
 if __name__ == '__main__':
     # a = SqlSave.insert_download_info()
-    SqlSave.delect_download_info()
+    SqlSave.delete_pay_refund()
     # a = SqlSave.insert_download_info('2017112800223321', 'zfb_20200519_6RygDDfSs87Ff7l0Q4xx.csv', '20200426', 'zfb')
     # print(a)

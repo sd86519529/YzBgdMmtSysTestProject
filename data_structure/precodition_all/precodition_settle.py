@@ -29,7 +29,13 @@ class PrecoditionSettle(object):
         SqlSave.insert_reconciliation_result()
 
     @staticmethod
-    def precondition_settle():
+    def precondition_fee_undertaker(is_change):
+        """生成对账结果记录"""
+        SqlSave.update_change(is_change)
+
+    @staticmethod
+    def precondition_settle(is_change):
         """生成结算前提条件"""
         PrecoditionSettle.precondition_download_info()
         PrecoditionSettle.precondition_reconciliation_result()
+        PrecoditionSettle.precondition_fee_undertaker(is_change)

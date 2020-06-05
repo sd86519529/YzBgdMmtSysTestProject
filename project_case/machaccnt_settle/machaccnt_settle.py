@@ -22,7 +22,7 @@ class MachSettle(unittest.TestCase):
 
     def setUp(self):
         CreatReconciliation().zfb_in_transit_true_data()
-        PrecoditionSettle.precondition_settle()
+        PrecoditionSettle.precondition_settle(1)
 
     def test_settle(self):
         PrecoditionSettle().reconditionAccountInfo()

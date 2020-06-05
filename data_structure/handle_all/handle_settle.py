@@ -26,18 +26,22 @@ class HandleSettle(object):
         self.assertEqual(trans_amount_total, mch_accnt_no_event_amt)
 
 
-
-
-
-
     @staticmethod
 
     def get_trans_amount_total():
         """统计结算入账的总金额"""
-        data_list = Constants.CREATE.creat_pay_true_list
-        trans_amount_total = 0
+        # 获取支付记账的金额
+        data_list = Constants.CREATE().get_creat_pay_true_list()
+        trans_amount_no_transfer = 0
         for list in data_list:
-            trans_amount_total = int(list[1])+trans_amount_total
+            trans_amount_no_transfer = int(list[1])+trans_amount_no_transfer
+        # 获取有转账的金额
+        data_list2 = Constants.CREATE().get_creat_dispatch_true_list()
+        trans_amount_transfer = 0
+        for list2 in data_list2:
+            trans_amount_transfer = trans_amount_transfer+int(list2[5])
+
+        trans_amount_total = trans_amount_no_transfer+trans_amount_transfer
         return trans_amount_total
 
 
