@@ -46,19 +46,19 @@ class Constants(object):
         # 对平列表生成
         # 支付记账列表
         def get_creat_pay_true_list(self):
-            creat_pay_true_list = [['jinweiceshi_settle_001', '300', 'test01', '300', '2020-05-19 11:33:44', '20251'],
-                                   ['jinweiceshi_settle_002', '30000', 'test02', '29000', '2020-05-19 11:33:44', '20251',
+            creat_pay_true_list = [['jinweiceshis_settle_001', '300', 'test01', '300', '2020-05-19 11:33:44', '20251'],
+                                   ['jinweiceshis_settle_002', '30000', 'test02', '29000', '2020-05-19 11:33:44', '20251',
                                     'test03', '1000'],
-                                   ['jinweiceshi_settle_004', '300', 'test04', '300', '2020-05-19 11:33:44', '20251']]
+                                   ['jinweiceshis_settle_004', '300', 'test04', '300', '2020-05-19 11:33:44', '20251']]
 
             return creat_pay_true_list
 
         # 退款记账列表
         def get_creat_refund_true_list(self):
             creat_refund_true_list = [
-                ['jinweiceshi_settle_001', '850', 'test05', '850', '2020-05-19 11:33:44', '20251'],
-                ['jinweiceshi_settle_002', '850', 'test06', '750', '2020-05-19 11:33:44', '20251', 'test07', '100'],
-                ['jinweiceshi_settle_004', '850', 'test08', '850', '2020-05-19 11:33:44', '20251']]
+                ['jinweiceshis_settle_001', '850', 'test05', '850', '2020-05-19 11:33:44', '20251'],
+                ['jinweiceshis_settle_002', '850', 'test06', '750', '2020-05-19 11:33:44', '20251', 'test07', '100'],
+                ['jinweiceshis_settle_004', '850', 'test08', '850', '2020-05-19 11:33:44', '20251']]
             return creat_refund_true_list
 
         #
@@ -66,7 +66,7 @@ class Constants(object):
         # ["trans_no","refund_trans_no","trans_time","trans_channel",["amount","order_no"]]
         # 分账-支付
         def get_creat_dispatch_true_list(self):
-            creat_dispatch_true_list = [['jinweiceshisettle005', '', '2020-05-19 11:33:44', '20251',
+            creat_dispatch_true_list = [['jinweiceshissettle005', '', '2020-05-19 11:33:44', '20251',
                                          [['300', 'testsettle10'], ['100', 'testsettle11'], ['100', 'testsettle12']],
                                          "200"]]
             return creat_dispatch_true_list
@@ -74,7 +74,7 @@ class Constants(object):
         # 分账-退款
         def get_creat_dispatch_refund_true_list(self):
             creat_dispatch_refund_true_list = [
-                ['jinweiceshisettle005', 'refundtransno1', '2020-05-19 11:33:44', '20251',
+                ['jinweiceshissettle005', 'refundtransno1', '2020-05-19 11:33:44', '20251',
                  [['850', 'testsettle13'], ['100', 'testsettle14'], ['100', 'testsettle15']]]]
 
             return creat_dispatch_refund_true_list
