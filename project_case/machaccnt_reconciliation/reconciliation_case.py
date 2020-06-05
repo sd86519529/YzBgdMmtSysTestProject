@@ -20,11 +20,11 @@ class Reconciliation(unittest.TestCase):
     """
 
     def setUp(self):
-        ClearingReconciliation.clearing_all()
+        # ClearingReconciliation.clearing_all()
         pass
 
     def tearDown(self):
-        ClearingReconciliation.clearing_all()
+        # ClearingReconciliation.clearing_all()
         pass
 
     @unittest.skip('测试')
@@ -42,7 +42,7 @@ class Reconciliation(unittest.TestCase):
         actual = PreconditionReconciliation.info_assert_kwargs_actual()
         Handle.machaccnt_handle_assert(self, expect, actual)
 
-    @unittest.skip('测试')
+    # @unittest.skip('测试')
     def test_zfb_reconciliation_true(self):
         """支付宝对平测试用例集合"""
         CreatReconciliation().zfb_in_transit_true_data()  # 制造对平的在途数据
@@ -97,7 +97,7 @@ class Reconciliation(unittest.TestCase):
         actual = PreconditionReconciliation.info_assert_kwargs_actual()
         Handle.machaccnt_handle_assert(self, expect, actual)
 
-    # @unittest.skip('测试')
+    @unittest.skip('测试')
     def test_qq_reconciliation_false(self):
         """qq对不平测试用例"""
         CreatReconciliation().qq_in_transit_data()  # 制造记账退款在途数据
