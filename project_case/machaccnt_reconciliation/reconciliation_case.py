@@ -20,10 +20,11 @@ class Reconciliation(unittest.TestCase):
     """
 
     def setUp(self):
+        ClearingReconciliation.clearing_all()
         pass
 
     def tearDown(self):
-        # ClearingReconciliation.clearing_all()
+        ClearingReconciliation.clearing_all()
         pass
 
     @unittest.skip('测试')
