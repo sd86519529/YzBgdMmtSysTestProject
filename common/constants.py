@@ -22,9 +22,10 @@ class Constants(object):
         false_yl_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\reconciliation\yl_20200427_f7Og5pzCK3DDZ73hFaUa.csv'
         false_qq_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\reconciliation\qq_20200427_gez41EKSpWo4zecIhnKf.csv'
 
-    class CREATE:
+    class CREATE():
         """制造对账数据生成列表"""
         # 问题列表生成
+        # trans_no trans_amount order_no order_amount trans_time channel
         zfb_pay = [['jinweiceshi_zfb_002', '300', 'test01', '300', '2020-05-19 11:33:44', '20251'],
                    ['jinweiceshi_zfb_003', '28000', 'test02', '28000', '2020-05-19 11:33:44', '20251'],
                    ['jinweiceshi_zfb_004', '320', 'test03', '320', '2020-05-19 11:33:44', '20251'],
@@ -43,7 +44,33 @@ class Constants(object):
                        '100']]
 
         # 对平列表生成
-        creat_pay_true_list = ['jinweiceshi_zfb_001', '300', 'test01', '300', '2020-05-19 11:33:44', '20251']
+        # 支付记账列表
+        def get_creat_pay_true_list(self):
+            creat_pay_true_list = [['jinweiceshi_settle_001', '300', 'test01', '300', '2020-01-01 11:33:44','20251'],
+                               ['jinweiceshi_settle_002', '400', 'test02', '300', '2020-01-01 11:33:44','20251','test03','100'],
+                               ['jinweiceshi_settle_004', '300', 'test04', '300', '2020-01-01 11:33:44', '20251']]
+
+            return creat_pay_true_list
+        # 退款记账列表
+        def get_creat_refund_true_list(self):
+            creat_refund_true_list = [['jinweiceshi_settle_001', '300', 'test05', '300', '2020-01-01 11:33:44', '20251'],
+                               ['jinweiceshi_settle_002', '400', 'test06', '300', '2020-01-01 11:33:44', '20251','test07', '100'],
+                               ['jinweiceshi_settle_004', '300', 'test08', '300', '2020-01-01 11:33:44', '20251']]
+            return creat_refund_true_list
+        #
+
+        # ["trans_no","refund_trans_no","trans_time","trans_channel",["amount","order_no"]]
+        # 分账-支付
+        def get_creat_dispatch_true_list(self):
+            creat_dispatch_true_list = [['jinweiceshisettle005','','2020-01-01 11:33:44', '20251',[['1000','testsettle10'],['100','testsettle11'],['100','testsettle12']],"900"]]
+            return creat_dispatch_true_list
+        # 分账-退款
+        def get_creat_dispatch_refund_true_list(self):
+            creat_dispatch_refund_true_list = [['jinweiceshisettle005','refundtransno1','2020-01-01 11:33:44', '20251',[['1000','testsettle13'],['100','testsettle14'],['100','testsettle15']]]]
+
+            return creat_dispatch_refund_true_list
+
+
 
     class CHANNEL:
         zfb = '2017112800223321'
@@ -91,6 +118,9 @@ class Constants(object):
         PREPAY = {'prepay_1': 'SUBMERCHANTS.PREPAY_1', 'prepay_2': 'SUBMERCHANTS.PREPAY_2'}  # 准备金账户
 
         DEPOSITORY = 'SUBMERCHANTS.DEPOSITORY'
+
+        ONWAY = 'SUBMERCHANTS.ONWAY'
+
 
     class HOST:
         TEST = 'HOST.TEST'  # 测试环境

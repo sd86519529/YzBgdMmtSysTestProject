@@ -36,6 +36,7 @@ class CreatReconciliation(object):
         """
         self.__init_data(button='qq')
 
+
     def zfb_in_transit_true_data(self):
         """
         支付宝对平数据产生
@@ -73,16 +74,97 @@ class CreatReconciliation(object):
         return data
 
     def __init_true_data(self):
-        data_list = Constants.CREATE.creat_pay_true_list
-        data = self.zfb_pay_data(data_list)
-        RequestBase.send_request(**data)
-        pass
+
+        button_list = ['zfb','cib','dlb','yl','qq']
+
+        for button in button_list:
+            if button == 'zfb':
+                data_creat_pay_true_list = Constants.CREATE().get_creat_pay_true_list()
+                data_creat_refund_true_list = Constants.CREATE().get_creat_refund_true_list()
+                data_creat_dispatch_true_list = Constants.CREATE().get_creat_dispatch_true_list()
+                data_creat_dispatch_refund_true_list = Constants.CREATE().get_creat_dispatch_refund_true_list()
+
+            elif button == 'cib':
+                data_creat_pay_true_list = Constants.CREATE().get_creat_pay_true_list()
+                data_creat_refund_true_list = Constants.CREATE().get_creat_refund_true_list()
+                data_creat_dispatch_true_list = Constants.CREATE().get_creat_dispatch_true_list()
+                data_creat_dispatch_refund_true_list = Constants.CREATE().get_creat_dispatch_refund_true_list()
+
+                self.__u_t(data_creat_pay_true_list, key='20692')
+                self.__u_t(data_creat_refund_true_list, key='20692')
+                self.__u_t(data_creat_dispatch_true_list, key='20692')
+                self.__u_t(data_creat_dispatch_refund_true_list, key='20692')
+            elif button == 'dlb':
+                data_creat_pay_true_list = Constants.CREATE().get_creat_pay_true_list()
+                data_creat_refund_true_list = Constants.CREATE().get_creat_refund_true_list()
+                data_creat_dispatch_true_list = Constants.CREATE().get_creat_dispatch_true_list()
+                data_creat_dispatch_refund_true_list = Constants.CREATE().get_creat_dispatch_refund_true_list()
+
+                self.__u_t(data_creat_pay_true_list, key='2091')
+                self.__u_t(data_creat_refund_true_list, key='2091')
+                self.__u_t(data_creat_dispatch_true_list, key='2091')
+                self.__u_t(data_creat_dispatch_refund_true_list, key='2091')
+
+            elif button == 'yl':
+                data_creat_pay_true_list = Constants.CREATE().get_creat_pay_true_list()
+                data_creat_refund_true_list = Constants.CREATE().get_creat_refund_true_list()
+                data_creat_dispatch_true_list = Constants.CREATE().get_creat_dispatch_true_list()
+                data_creat_dispatch_refund_true_list = Constants.CREATE().get_creat_dispatch_refund_true_list()
+
+                self.__u_t(data_creat_pay_true_list, key='2056')
+                self.__u_t(data_creat_refund_true_list, key='2056')
+                self.__u_t(data_creat_dispatch_true_list, key='2056')
+                self.__u_t(data_creat_dispatch_refund_true_list, key='2056')
+
+            elif button == 'qq':
+                data_creat_pay_true_list = Constants.CREATE().get_creat_pay_true_list()
+                data_creat_refund_true_list = Constants.CREATE().get_creat_refund_true_list()
+                data_creat_dispatch_true_list = Constants.CREATE().get_creat_dispatch_true_list()
+                data_creat_dispatch_refund_true_list = Constants.CREATE().get_creat_dispatch_refund_true_list()
+
+                self.__u_t(data_creat_pay_true_list, key='20061')
+                self.__u_t(data_creat_refund_true_list, key='20061')
+                self.__u_t(data_creat_dispatch_true_list, key='20061')
+                self.__u_t(data_creat_dispatch_refund_true_list, key='20061')
+
+            else:
+                data_creat_pay_true_list = ''
+                data_creat_refund_true_list = ''
+                data_creat_dispatch_true_list = ''
+                data_creat_dispatch_refund_true_list = ''
+
+            for i in data_creat_pay_true_list:
+                data = self.zfb_pay_data(i, refund=False)
+                RequestBase.send_request(**data)
+
+            for i in data_creat_refund_true_list:
+                data = self.zfb_pay_data(i, refund=True)
+                RequestBase.send_request(**data)
+
+            for i in data_creat_dispatch_true_list:
+                data = self.diapatch_data(i, refund=False)
+                RequestBase.send_request(**data)
+
+            for i in data_creat_dispatch_refund_true_list:
+                data = self.diapatch_data(i, refund=True)
+                RequestBase.send_request(**data)
+
 
     def __u_t(self, lis, key):
         for d in lis:
             for x in range(len(d)):
                 if d[x] == '20251':
                     d[x] = key
+                # todo:流水号，订单号未处理
+                if 'jinweiceshi' in d[x]:
+                    d[x] = d[x]+key
+                elif 'refundtransno' in d[x]:
+                    d[x] = d[x]+key
+                if isinstance(d[x],list):
+                    for y in d[x]:
+                        y[-1] = y[-1]+key
+                elif 'test' in d[x]:
+                    d[x] = d[x] + key
 
     def __init_data(self, button):
         """支付记账,退款data"""
@@ -143,6 +225,47 @@ class CreatReconciliation(object):
                 g['dispatch_type'] = '2'
         return data
 
+    @staticmethod
+    def get_dispatch_data():
+        """构造分账的请求接口"""
+        data = {"请求类型": '',
+                "data": {"mch_no":"MH20181229115220NBUu",
+                          "out_trans_no":"ZZ20200604155127",
+                          "biz_type":"mchaccnt.dispatch",
+                          "biz_content":{
+                              "split_accnt_detail":[
+                                  {"mch_accnt_no":"T0020181229184441000000","amount":"1000","dispatch_event":"pay","dispatch_type":"1","order_no":"DD120200604155127","trans_no":"JY120200604155127","refund_trans_no":"","trans_time":"2020-06-04 15:51:27","card_no":"","promotion_type":"","promotion_amt":"","business_type":"","charge_rate":"","trans_channel":"2051"},
+                                  {"mch_accnt_no":"T0020181229115338000002","amount":"100","dispatch_event":"transfer","dispatch_type":"1","order_no":"DD220200604155127","trans_no":"JY120200604155127","refund_trans_no":"","trans_time":"2020-06-04 15:51:27","card_no":"","promotion_type":"","promotion_amt":"","business_type":"","charge_rate":"","trans_channel":"2051"},
+                                  {"mch_accnt_no":"T0020181229184441000000","amount":"100","dispatch_event":"transfer","dispatch_type":"2","order_no":"DD320200604155127","trans_no":"JY120200604155127","refund_trans_no":"","trans_time":"2020-06-04 15:51:27","card_no":"","promotion_type":"","promotion_amt":"","business_type":"","charge_rate":"","trans_channel":"2051"}]},
+                          "sign_type":"MD5",
+                          "timestamp":"20200604155127",
+                          "request_operation":"1"}}
+        return data
+# ["trans_no","refund_trans_no","trans_time","trans_channel",["amount","order_no"]]
+    def diapatch_data(self, args, refund=False):
+        """处理分账的参数"""
+        data = CreatReconciliation.get_dispatch_data()
+        order_list = args[4]
+        for i in range(0,len(order_list)):
+
+            data['data']['biz_content']['split_accnt_detail'][i]['amount'] = order_list[i][0]
+            data['data']['biz_content']['split_accnt_detail'][i]['order_no'] = order_list[i][1]
+            data['data']['biz_content']['split_accnt_detail'][i]['trans_channel'] = args[3]
+            data['data']['biz_content']['split_accnt_detail'][i]['trans_no'] = args[0]
+            data['data']['biz_content']['split_accnt_detail'][i]['trans_time'] = args[2]
+
+        if refund is True:
+            for i in range(0, len(order_list)):
+
+                data['data']['biz_content']['split_accnt_detail'][i]['refund_trans_no'] = args[1]
+                data['data']['biz_content']['split_accnt_detail'][0]['dispatch_event'] = 'refund'
+
+                data['data']['biz_content']['split_accnt_detail'][0]['dispatch_type'] = '2'
+                data['data']['biz_content']['split_accnt_detail'][1]['dispatch_type'] = '2'
+                data['data']['biz_content']['split_accnt_detail'][2]['dispatch_type'] = '1'
+
+        return data
+
 
 if __name__ == '__main__':
-    CreatReconciliation().test()
+    CreatReconciliation().zfb_in_transit_true_data()

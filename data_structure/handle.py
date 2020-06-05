@@ -1,4 +1,5 @@
 from data_structure.handle_all.handle_keeping_accounts import HandleKeepingAccounts
+from data_structure.handle_all.handle_settle import HandleSettle
 from data_structure.handle_all.handle_withdrawal import HandleWithdrawal
 from data_structure.handle_all.handle_reconciliation import HandleReconciliation
 from common.constants import Constants
@@ -81,3 +82,9 @@ class Handle(object):
     def machaccnt_handle_assert(self, expect, actual):
         # 对账断言
         HandleReconciliation.handle_assert(self, expect, actual)
+
+    @staticmethod
+    def machaccnt_settle_handle_assert(self):
+        # 结算入账断言
+        HandleSettle.public_handle(self)
+
