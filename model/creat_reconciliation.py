@@ -36,7 +36,6 @@ class CreatReconciliation(object):
         """
         self.__init_data(button='qq')
 
-
     def zfb_in_transit_true_data(self):
         """
         支付宝对平数据产生
@@ -77,6 +76,7 @@ class CreatReconciliation(object):
         data_list = Constants.CREATE.creat_pay_true_list
         data = self.zfb_pay_data(data_list)
         RequestBase.send_request(**data)
+        pass
 
     def __u_t(self, lis, key):
         for d in lis:
@@ -145,4 +145,4 @@ class CreatReconciliation(object):
 
 
 if __name__ == '__main__':
-    CreatReconciliation().cil_in_transit_data()
+    CreatReconciliation().test()

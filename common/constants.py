@@ -41,6 +41,7 @@ class Constants(object):
                       ['jinweiceshi_zfb_016', '850', 'test16', '850', '2020-05-19 11:33:44', '29999'],
                       ['jinweiceshi_zfb_013', '850', 'test13', '750', '2020-05-19 11:33:44', '20251', 'test17',
                        '100']]
+
         # 对平列表生成
         creat_pay_true_list = ['jinweiceshi_zfb_001', '300', 'test01', '300', '2020-05-19 11:33:44', '20251']
 
