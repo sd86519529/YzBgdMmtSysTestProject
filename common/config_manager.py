@@ -37,7 +37,7 @@ class ConfigManager(object):
         keys = key.split('.')
         with open(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'config', config_name),
                   encoding='UTF-8') as config:
-            value = yaml.load(config).get(keys[0])
+            value = yaml.load(config,Loader=yaml.FullLoader).get(keys[0])
             if len(keys) > 1:
                 for index in range(1, len(keys)):
                     value = value[keys[index]]

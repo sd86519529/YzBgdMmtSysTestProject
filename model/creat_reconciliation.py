@@ -165,14 +165,14 @@ class CreatReconciliation(object):
                 if d[x] == '20251':
                     d[x] = key
                 # todo:流水号，订单号未处理
-                if 'jinweiceshi' in d[x]:
+                if 'jinweiceshis' in d[x]:
                     d[x] = d[x] + key
                 elif 'refundtransno' in d[x]:
                     d[x] = d[x] + key
                 if isinstance(d[x], list):
                     for y in d[x]:
                         y[-1] = y[-1] + key
-                elif 'test' in d[x]:
+                elif 'tests' in d[x]:
                     d[x] = d[x] + key
 
     def __init_data(self, button):

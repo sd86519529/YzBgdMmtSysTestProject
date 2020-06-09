@@ -1,26 +1,40 @@
+import os
+
+
 class Constants(object):
     """静态资源管理类"""
 
     class STATEMENT:
         """对账单"""
-        big_zfb_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\resolvingbill\zfb_20200426_vuQs6pRk5GFhOfo6Lpzz.csv'  # 过大的对账单(zfb)
-        none_zfb_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\resolvingbill\zfb_20200417_6RygDDfSs87Ff7l0Q4xt.csv'  # 空csv文件
-        zfb_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\resolvingbill\zfb_20200422_iyUiAEjyWnw4031iDwmp.csv'  # 正常的支付宝对账单文件
-        zfb2_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\resolvingbill\zfb_20200422_iyUiAEjyWnw4031iDwml.csv'  # 正常的支付宝对账单文件2
-        cib_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\resolvingbill\cib_20200427_7EGLKChvMMQh1tRy3egg.csv'  # 正常的cib对账单文件
-        dlb_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\resolvingbill\dlb_20200427_3v8u4AtdJFYp1BoPRZdg.csv'  # 正常的cib对账单文件
-        qq_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\resolvingbill\qq_20200427_gez41EKSpWo4zecIhnKf.csv'  # 正常的cib对账单文件
-        wx_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\resolvingbill\wx_20200427_DVqfMez6kyIiHHoopdkh.csv'  # 正常的cib对账单文件
-        yl_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\resolvingbill\yl_20200427_f7Og5pzCK3DDZ73hFaUa.csv'  # 正常的cib对账单文件
+
+        path = os.path.abspath(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+
+        # path = os.path.abspath(os.path.join(os.path.dirname("__file__"), os.path.pardir, os.path.pardir))
+        os.path.join(path, 'project_data','resolvingbill', 'yl_20200427_f7Og5pzCK3DDZ73hFaUa.csv')
+
+        big_zfb_path = os.path.join(path,'project_data','resolvingbill','zfb_20200426_vuQs6pRk5GFhOfo6Lpzz.csv') # 过大的对账单(zfb)
+        none_zfb_path = os.path.join(path, 'project_data','resolvingbill', 'zfb_20200417_6RygDDfSs87Ff7l0Q4xt.csv')  # 空csv文件
+        zfb_path = os.path.join(path, 'project_data','resolvingbill', 'zfb_20200422_iyUiAEjyWnw4031iDwmp.csv')  # 正常的支付宝对账单文件
+        zfb2_path = os.path.join(path, 'project_data','resolvingbill', 'zfb_20200422_iyUiAEjyWnw4031iDwml.csv')  # 正常的支付宝对账单文件2
+        cib_path = os.path.join(path, 'project_data','resolvingbill', 'cib_20200427_7EGLKChvMMQh1tRy3egg.csv')  # 正常的cib对账单文件
+        dlb_path = os.path.join(path, 'project_data','resolvingbill', 'dlb_20200427_3v8u4AtdJFYp1BoPRZdg.csv')  # 正常的cib对账单文件
+        qq_path = os.path.join(path, 'project_data','resolvingbill', 'qq_20200427_gez41EKSpWo4zecIhnKf.csv')  # 正常的cib对账单文件
+        wx_path = os.path.join(path, 'project_data','resolvingbill', 'wx_20200427_DVqfMez6kyIiHHoopdkh.csv')  # 正常的cib对账单文件
+        yl_path = os.path.join(path, 'project_data','resolvingbill', 'yl_20200427_f7Og5pzCK3DDZ73hFaUa.csv')  # 正常的cib对账单文件
 
     class RECONCILIATION:
+
+        # path = os.path.abspath(os.path.join(os.path.dirname("__file__"), os.path.pardir))
+        path = os.path.abspath(os.path.join(os.path.dirname("__file__"), os.path.pardir, os.path.pardir))
+        # path = os.path.abspath(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+
         """对账需要的对账单"""
-        false_zfb_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\reconciliation\zfb_20200519_6RygDDfSs87Ff7l0Q4xx.csv'  # 出现问题件的对账单
-        true_zfb_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\reconciliation\zfb_20200519_6RygDDfSs87Ff7l0Q4true.csv'  # 支付宝对平的对账单
-        false_cib_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\reconciliation\cib_20200427_7EGLKChvMMQh1tRy3exx.csv'
-        false_dlb_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\reconciliation\dlb_20200427_3v8u4AtdJFYp1BoPRZdg.csv'
-        false_yl_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\reconciliation\yl_20200427_f7Og5pzCK3DDZ73hFaUa.csv'
-        false_qq_path = 'G:\YzaoutTestProject\YzAutoTestProject\project_data\\reconciliation\qq_20200427_gez41EKSpWo4zecIhnKf.csv'
+        false_zfb_path =  os.path.join(path, 'project_data','reconciliation', 'zfb_20200519_6RygDDfSs87Ff7l0Q4xx.csv') # 出现问题件的对账单
+        true_zfb_path =  os.path.join(path, 'project_data', 'reconciliation', 'zfb_20200519_6RygDDfSs87Ff7l0Q4true.csv')# 支付宝对平的对账单
+        false_cib_path = os.path.join(path, 'project_data', 'reconciliation', 'cib_20200427_7EGLKChvMMQh1tRy3exx.csv')
+        false_dlb_path = os.path.join(path, 'project_data', 'reconciliation', 'dlb_20200427_3v8u4AtdJFYp1BoPRZdg.csv')
+        false_yl_path = os.path.join(path, 'project_data', 'reconciliation', 'yl_20200427_f7Og5pzCK3DDZ73hFaUa.csv')
+        false_qq_path = os.path.join(path, 'project_data', 'reconciliation', 'qq_20200427_gez41EKSpWo4zecIhnKf.csv')
 
     class CREATE():
         """制造对账数据生成列表"""
@@ -46,19 +60,19 @@ class Constants(object):
         # 对平列表生成
         # 支付记账列表
         def get_creat_pay_true_list(self):
-            creat_pay_true_list = [['jinweiceshi_settle_001', '300', 'test01', '300', '2020-05-19 11:33:44', '20251'],
-                                   ['jinweiceshi_settle_002', '30000', 'test02', '29000', '2020-05-19 11:33:44', '20251',
-                                    'test03', '1000'],
-                                   ['jinweiceshi_settle_004', '300', 'test04', '300', '2020-05-19 11:33:44', '20251']]
+            creat_pay_true_list = [['jinweiceshis_settle_001', '300', 'tests01', '300', '2020-05-19 11:33:44', '20251'],
+                                   ['jinweiceshis_settle_002', '30000', 'tests02', '29000', '2020-05-19 11:33:44', '20251',
+                                    'tests03', '1000'],
+                                   ['jinweiceshis_settle_004', '300', 'tests04', '300', '2020-05-19 11:33:44', '20251']]
 
             return creat_pay_true_list
 
         # 退款记账列表
         def get_creat_refund_true_list(self):
             creat_refund_true_list = [
-                ['jinweiceshi_settle_001', '850', 'test05', '850', '2020-05-19 11:33:44', '20251'],
-                ['jinweiceshi_settle_002', '850', 'test06', '750', '2020-05-19 11:33:44', '20251', 'test07', '100'],
-                ['jinweiceshi_settle_004', '850', 'test08', '850', '2020-05-19 11:33:44', '20251']]
+                ['jinweiceshis_settle_001', '850', 'tests05', '850', '2020-05-19 11:33:44', '20251'],
+                ['jinweiceshis_settle_002', '850', 'tests06', '750', '2020-05-19 11:33:44', '20251', 'tests07', '100'],
+                ['jinweiceshis_settle_004', '850', 'tests08', '850', '2020-05-19 11:33:44', '20251']]
             return creat_refund_true_list
 
         #
@@ -66,7 +80,7 @@ class Constants(object):
         # ["trans_no","refund_trans_no","trans_time","trans_channel",["amount","order_no"]]
         # 分账-支付
         def get_creat_dispatch_true_list(self):
-            creat_dispatch_true_list = [['jinweiceshisettle005', '', '2020-05-19 11:33:44', '20251',
+            creat_dispatch_true_list = [['jinweiceshissettle005', '', '2020-05-19 11:33:44', '20251',
                                          [['300', 'testsettle10'], ['100', 'testsettle11'], ['100', 'testsettle12']],
                                          "200"]]
             return creat_dispatch_true_list
@@ -74,7 +88,7 @@ class Constants(object):
         # 分账-退款
         def get_creat_dispatch_refund_true_list(self):
             creat_dispatch_refund_true_list = [
-                ['jinweiceshisettle005', 'refundtransno1', '2020-05-19 11:33:44', '20251',
+                ['jinweiceshissettle005', 'refundtransno1', '2020-05-19 11:33:44', '20251',
                  [['850', 'testsettle13'], ['100', 'testsettle14'], ['100', 'testsettle15']]]]
 
             return creat_dispatch_refund_true_list
@@ -182,3 +196,12 @@ class Constants(object):
                         "biz_type": "mchaccnt.pay.dispatch",
                         "out_trans_no": "225295c2068ae5405cada7edf1670749a6", "sign_type": "MD5",
                         "timestamp": "20191028022240", "mch_no": "MH20181229115220NBUu"}}
+
+
+if __name__ == '__main__':
+    path = os.path.abspath(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+    config_path = ''.join([os.path.abspath(os.path.dirname(os.path.dirname(__file__)))])
+    path2 = os.path.join(path, 'project_data', 'reconciliation', 'zfb_20200519_6RygDDfSs87Ff7l0Q4true.csv')
+    print(config_path)
+    print(path)
+    print (path2)

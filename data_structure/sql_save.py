@@ -336,7 +336,7 @@ class SqlSave(object):
     @staticmethod
     def delete_reconciliation_result():
         sql = "delete from reconciliation_result where mchNo='%s' and beginTime='%s'" % (
-            Constants.Merchant.CS, '2020-05-19')
+            ConfigManager.get_service(Constants.Merchant.CS), '2020-05-19')
         ConnectionMysql().execute_db(sql)
 
     @staticmethod
@@ -375,41 +375,63 @@ class SqlSave(object):
     #     result = ConnectionMysql().execute_db(sql)
     #     return result
 
-    @staticmethod
-    def delect_download_info():
-        """删除对账单下载记录"""
-        sql = "DELETE FROM  `deposit`.`download_info` WHERE mch_no = 'MH20181229115220NBUu' and bill_date = '20200101';"
-        ConnectionMysql().execute_db(sql)
+    # @staticmethod
+    # def insert_reconciliation_result():
+    #     """插入对账记录"""
+    #     sql = "INSERT INTO `deposit`.`reconciliation_result`(`id`, `reconciliation_count`, `bookkeeping_count`, `rdChannel`, `isHisData`, `mchNo`, `remark`, `beginTime`, `endTime`, `createTime`, `trans_fee`, `acc_mch_id`, `diff_amt`, `account_type`, `keep_amt`, `recon_amt`, `seq`, `match_flag`, `profit_loss_amt`) VALUES (NULL, 5, 5, 'zfb', NULL, 'MH20181229115220NBUu', NULL, '2020-01-01', '2020-01-01', '2020-01-01 00:00:04', '0', '2017112800223321', 0, 'Y', 1000, 980, 1, '2', 20);"
+    #     result = ConnectionMysql().execute_db(sql)
+    #     return result
 
     @staticmethod
-    def insert_reconciliation_result():
-        """插入对账记录"""
-        sql = "INSERT INTO `deposit`.`reconciliation_result`(`id`, `reconciliation_count`, `bookkeeping_count`, `rdChannel`, `isHisData`, `mchNo`, `remark`, `beginTime`, `endTime`, `createTime`, `trans_fee`, `acc_mch_id`, `diff_amt`, `account_type`, `keep_amt`, `recon_amt`, `seq`, `match_flag`, `profit_loss_amt`) VALUES (NULL, 5, 5, 'zfb', NULL, 'MH20181229115220NBUu', NULL, '2020-01-01', '2020-01-01', '2020-01-01 00:00:04', '0', '2017112800223321', 0, 'Y', 1000, 980, 1, '2', 20);"
-        result = ConnectionMysql().execute_db(sql)
-        return result
-
-    @staticmethod
-    def delect_reconciliation_result():
-        """删除对账记录"""
-        sql = "DELETE FROM `deposit`.`reconciliation_result` WHERE mchNo= 'MH20181229115220NBUu'and beginTime = '2020-01-01';"
-        ConnectionMysql().execute_db(sql)
-
-    @staticmethod
-    def select_his_mch_accnt_keep_event_amt(mch_accnt_no):
+    def select_his_mch_accnt_keep_event_amt(mch_accnt_no,account_type):
         """查询待结算表的各子账户金额"""
-        sql = "SELECT event_amt FROM `deposit`.`his_mch_accnt_keep` WHERE `mch_accnt_no` = '%s';" % mch_accnt_no
+        sql = "SELECT event_amt FROM `deposit`.`his_mch_accnt_keep` WHERE `mch_accnt_no` = '%s'AND account_type = '%s';" % (mch_accnt_no,account_type)
         event_amt = ConnectionMysql().select_db(sql)
         return event_amt[0][0]
 
     @staticmethod
     def delect_his_mch_accnt_keep():
         """删除待结算数据"""
-        sql = "DELETE FROM `deposit`.`his_mch_accnt_keep` WHERE mch_no = 'MH20181229115220NBUu' and event_time = '2020-01-01';"
+        sql = "DELETE FROM `deposit`.`his_mch_accnt_keep` WHERE mch_no = 'MH20181229115220NBUu' and event_time = '2020-05-19';"
         ConnectionMysql().execute_db(sql)
 
+    @staticmethod
+    def select_reconciliation_result_settle(channel):
+        """查找对账结果信息"""
+        sql = "select trans_fee,keep_amt,recon_amt,profit_loss_amt from reconciliation_result where mchNo='MH20181229115220NBUu' and beginTime='2020-05-19' and rdChannel = '%s';"%channel
+        result = ConnectionMysql().select_db(sql)
+        return result[0]
+
+    @staticmethod
+    def select_settle_change(acc_mch_id):
+        """查询手续费费率"""
+        sql = "select channel_rate_real from `deposit`.`pay_code_config` where acc_mch_id='%s'"%acc_mch_id
+        result = ConnectionMysql().select_db(sql)
+        return result[0][0]
+
+    @staticmethod
+    def insert_transaction_details(channel):
+        """插入流水明细"""
+        sql = "INSERT INTO `deposit`.`transaction_details`(`id`, `mchno`, `srvrtid`, `trntype`, `dtacct`, `trnamt`, `balamt`, `currency`, `memo`, `correlate_acctid`, `correlate_name`, `correlate_bankname`, `correlate_bankcode`, `businesstype`, `attachinfo`, `status`, `type`, `acc_mch_id`, `settle_type`, `is_equals_amount`, `bill_date`, `channel_type`) VALUES (48721, 'MH20181229115220NBUu', '67010839', 'CREDIT', '2020-05-20T01:05:02', 274.13000, '25896459.32', 'RMB', '网联付款|swzhifu5 2020-03-19', '622202400008', '支付宝（中国）网络技术有限公司', '支付宝（中国）网络技术有限公司', 'Z2007933000010', '', '2020032000945954392000002', '0', 'onway', NULL, '2', 'Y', '', '%s');"%channel
+        ConnectionMysql().execute_db(sql)
+
+    @staticmethod
+    def delete_transaction_details():
+        """删除结算明细"""
+        sql = "DELETE FROM `deposit`.`transaction_details` where mchno = 'MH20181229115220NBUu' and channel_type = 'zfb';"
+        ConnectionMysql().execute_db(sql)
+
+    @staticmethod
+    def his_settled_amount():
+        """删除结算明细"""
+        sql = "DELETE FROM his_settled_amount where mch_no = 'MH20181229115220NBUu' and trans_time = '2020-05-19 11:33:44';"
+        ConnectionMysql().execute_db(sql)
 
 if __name__ == '__main__':
     # a = SqlSave.insert_download_info()
-    SqlSave.delete_pay_refund()
-    # a = SqlSave.insert_download_info('2017112800223321', 'zfb_20200519_6RygDDfSs87Ff7l0Q4xx.csv', '20200426', 'zfb')
-    # print(a)
+    # a = SqlSave.select_reconciliation_result('zfb')
+    a = SqlSave.select_settle_change()
+
+    # a = SqlSave.insert_download_info('2017112800223
+    # 321', 'zfb_20200519_6RygDDfSs87Ff7l0Q4xx.csv', '20200426', 'zfb')
+    print(a)

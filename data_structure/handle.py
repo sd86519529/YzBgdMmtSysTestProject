@@ -84,7 +84,12 @@ class Handle(object):
         HandleReconciliation.handle_assert(self, expect, actual)
 
     @staticmethod
-    def machaccnt_settle_handle_assert(self):
+    def machaccnt_settle_handle_assert(self,channel,is_change):
         # 结算入账断言
-        HandleSettle.public_handle(self)
+        HandleSettle.public_handle(self,channel,is_change)
+
+    @staticmethod
+    def machaccnt_settle_end_handle_assert(self,amount_befour):
+        # 结算入账断言
+        HandleSettle.remain_ant_assert(self,amount_befour)
 

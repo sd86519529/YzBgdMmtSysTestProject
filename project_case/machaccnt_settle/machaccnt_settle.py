@@ -11,25 +11,34 @@ http://172.16.202.160:3054/handMovement/settle?today=2020-06-01
 8.清除数据
 """
 import unittest
-from data_structure.clearing_all.clearing_reconciliation import ClearingReconciliation
+
+from ddt import ddt, data
+
 from data_structure.clearing_all.clearing_settle import ClearingSettle
 from data_structure.handle import Handle
 from data_structure.precodition_all.precodition_settle import PrecoditionSettle
-from model.creat_reconciliation import CreatReconciliation
 
+data1 = (("zfb",1),("zfb",2))
+@ddt
 
 class MachSettle(unittest.TestCase):
 
     def setUp(self):
-        CreatReconciliation().zfb_in_transit_true_data()
-        PrecoditionSettle.precondition_settle(1)
+        pass
 
-    def test_settle(self):
+    @data(*data1)
+    def test_settle(self,data1):
+        channel = data1[0]
+        is_change = data1[1]
+        PrecoditionSettle.precondition_settle(channel, is_change)
+        amount_befour = PrecoditionSettle.get_remian_amt()
         PrecoditionSettle().reconditionAccountInfo()
-        Handle().machaccnt_settle_handle_assert(self)
+        Handle().machaccnt_settle_handle_assert(self,channel,is_change)
+
+        PrecoditionSettle().settle()
+        Handle().machaccnt_settle_end_handle_assert(self,amount_befour)
 
     def tearDown(self):
-        ClearingReconciliation.clearing_pay_refund()
         ClearingSettle.settle_all_clear()
 
 
