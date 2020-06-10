@@ -51,6 +51,11 @@ class Reconciliation(unittest.TestCase):
         PreconditionDowStatement.creat_download_info(Constants.CHANNEL.zfb, path_name, '20200519', 'zfb')
         PreconditionDowStatement.statement_analyze_send()
         PreconditionDowStatement.recondition()
+        expect = CreatReconciliation.info_assert_kwargs(trans_fee='87', recon_amt=27413, account_type='Y',
+                                                        info_len=0,
+                                                        info_list=[])
+        actual = PreconditionReconciliation.info_assert_kwargs_actual()
+        Handle.machaccnt_handle_assert(self, expect, actual)
 
     @unittest.skip('测试')
     def test_cib_reconciliation_false(self):

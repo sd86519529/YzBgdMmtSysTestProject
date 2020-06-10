@@ -196,12 +196,3 @@ class Constants(object):
                         "biz_type": "mchaccnt.pay.dispatch",
                         "out_trans_no": "225295c2068ae5405cada7edf1670749a6", "sign_type": "MD5",
                         "timestamp": "20191028022240", "mch_no": "MH20181229115220NBUu"}}
-
-
-if __name__ == '__main__':
-    path = os.path.abspath(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
-    config_path = ''.join([os.path.abspath(os.path.dirname(os.path.dirname(__file__)))])
-    path2 = os.path.join(path, 'project_data', 'reconciliation', 'zfb_20200519_6RygDDfSs87Ff7l0Q4true.csv')
-    print(config_path)
-    print(path)
-    print (path2)

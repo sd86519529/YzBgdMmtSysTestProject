@@ -85,7 +85,7 @@ class CreatReconciliation(object):
 
     def __init_true_data(self):
 
-        button_list = ['zfb', 'cib', 'dlb', 'yl', 'qq']
+        button_list = ['zfb','cib','dlb','yl','qq']
 
         for button in button_list:
             if button == 'zfb':
@@ -278,6 +278,7 @@ class CreatReconciliation(object):
 
         if refund is True:
             for i in range(0, len(order_list)):
+
                 data['data']['biz_content']['split_accnt_detail'][i]['refund_trans_no'] = args[1]
                 data['data']['biz_content']['split_accnt_detail'][0]['dispatch_event'] = 'refund'
 
